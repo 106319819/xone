@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.JoinColumnOrFormula;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -108,11 +110,13 @@ public class Person implements Serializable{
 	private Long createTime;
 
 	
-	@OneToMany
+	@JsonIgnore
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="PersonRelations",joinColumns = {@JoinColumn(name="personId")},inverseJoinColumns= {@JoinColumn(name="organizationId")})
 	private List<Organization> organizations;
 	
-	@OneToOne
+	@JsonIgnore
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="accountId")
 	private Account account;
 	

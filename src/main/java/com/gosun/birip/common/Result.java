@@ -30,13 +30,18 @@ public class Result<T>
 		private Integer page;
 		private Integer size;
 		private Integer total;
-		List<T> conent;
+		private List<T> conent;
 		public PageResult(Integer page,Integer size,Integer total,List<T> list){
 			this.page = page;
 			this.size = size;
 			this.total = total;
 			this.conent = list;
 		}
+		
+		public PageResult(List<T> list){
+			this.conent = list;
+		}
+		
 		public Integer getPage()
 		{
 			return page;

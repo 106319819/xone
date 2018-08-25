@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -37,7 +40,8 @@ public class Account implements Serializable{
 	@Column(length=256,columnDefinition="varchar(256) comment '备注' ")
 	private String comment;
 	
-	@OneToOne
+	@JsonIgnore
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="personId", columnDefinition="int comment '引用person表的persion_id' ")
 	private Person person;
 

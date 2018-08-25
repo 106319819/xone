@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gosun.birip.common.Result;
@@ -37,13 +37,13 @@ public class OrganizationController
 	}
 	
 	@RequestMapping("find-by-parent/{parentId}")
-	public Result<?> findByParentId(@RequestParam("parentId") Long parentId){
+	public Result<?> findByParentId(@PathVariable("parentId") Long parentId){
 		List<Organization> result = organizationService.findByParentId(parentId);
 		return Result.success(result);
 	}
 	
 	@RequestMapping("delete-by-id/{organizationId}")
-	public Result<?> delete(@RequestParam("organizationId") Long organizationId){
+	public Result<?> delete(@PathVariable("organizationId") Long organizationId){
 		organizationService.delete(organizationId);
 		return Result.success(organizationId);
 		

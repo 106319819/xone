@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -16,7 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gosun.birip.SpringBootBaseTest;
 import com.gosun.birip.core.entity.Organization;
 
-import ch.qos.logback.classic.pattern.Util;
 
 public class OrganizationControllerTest extends SpringBootBaseTest
 {
@@ -62,7 +63,53 @@ public class OrganizationControllerTest extends SpringBootBaseTest
 	@Test
 	public void testFindAll()
 	{
-		fail("Not yet implemented");
+		try{
+			int page=0,size=10;
+			PageRequest pageable = PageRequest.of(page, size, Direction.ASC, "organizationId");
+			//Sort sort = new Sort(Direction.DESC, "id");
+		    //Pageable pageable = new Pageable();
+		    
+		    
+			ObjectMapper mapper = new ObjectMapper();
+			String str = mapper.writeValueAsString(pageable);
+			str = "{\"page\":1,\"size\":10,\"sort\":[{\"property\":\"sortNo\",\"direction\":\"ASC\"},{\"property\":\"organizationId\",\"direction\":\"ASC\"}]}";
+			MockHttpServletRequestBuilder mhr = MockMvcRequestBuilders.get("/organization/find-all");
+			mhr.accept(MediaType.APPLICATION_JSON_UTF8);
+			mhr.contentType(MediaType.APPLICATION_JSON_UTF8);
+			mhr.header(HttpHeaders.AUTHORIZATION,"authorization");
+			mhr.content(str);
+			
+			ResultActions actions = mvc.perform(mhr);
+			actions.andExpect(MockMvcResultMatchers.status().isOk());
+			actions.andDo(MockMvcResultHandlers.print());
+			actions.andReturn();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			fail("Not yet implemented");
+		}
 	}
 
+	@Test
+	public void testFindByParentId()
+	{
+		try{
+
+			MockHttpServletRequestBuilder mhr = MockMvcRequestBuilders.get("/organization/find-by-parent/0");
+			mhr.accept(MediaType.APPLICATION_JSON_UTF8);
+			mhr.contentType(MediaType.APPLICATION_JSON_UTF8);
+			mhr.header(HttpHeaders.AUTHORIZATION,"authorization");
+
+			ResultActions actions = mvc.perform(mhr);
+			actions.andExpect(MockMvcResultMatchers.status().isOk());
+			actions.andDo(MockMvcResultHandlers.print());
+			actions.andReturn();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			fail("Not yet implemented");
+		}
+	}
 }

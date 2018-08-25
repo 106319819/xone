@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,8 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Value;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
@@ -63,7 +63,8 @@ public class Organization implements Serializable{
 	@Column(length=20,nullable=false,columnDefinition="bigint(20) comment '创建时间' ")
 	private Long createTime;
 
-	@OneToMany
+	@JsonIgnore
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="PersonRelations",joinColumns = {@JoinColumn(name="organizationId")},inverseJoinColumns= {@JoinColumn(name="personId")})
 	private List<Person> persons;
 

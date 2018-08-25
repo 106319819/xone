@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="RegionProvince")
 public class RegionProvince implements Serializable{
@@ -34,10 +36,12 @@ public class RegionProvince implements Serializable{
 	@Column(columnDefinition="varchar(32) comment'省份拼音码'  ")
 	private String chineseCode;
 
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="nationalityId")
 	private RegionNationality regionNationality;
 	
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="RegionCity" ,joinColumns= {@JoinColumn(name="proviceCode")},inverseJoinColumns= {@JoinColumn(name="cityCode")} )
 	private List<RegionCity> regionCities;
