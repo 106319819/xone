@@ -44,6 +44,7 @@ public class RegionNationality implements Serializable{
 
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="RegionProvince", joinColumns= {@JoinColumn(name="nationalityId")},inverseJoinColumns= {@JoinColumn(name="provinceCode")})
+	//@JoinTable(name="RegionProvince", joinColumns= {@JoinColumn(name="nationalityId")},inverseJoinColumns= {@JoinColumn(name="provinceCode")})
+	@JoinColumn(name="nationalityId")
 	private List<RegionProvince> regionProvinces;
 }

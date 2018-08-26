@@ -40,7 +40,8 @@ public class RegionCity implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="RegionCounty",joinColumns= {@JoinColumn(name="cityCode")}, inverseJoinColumns = {@JoinColumn(name="countyCode")})
+	//@JoinTable(name="RegionCounty",joinColumns= {@JoinColumn(name="cityCode")}, inverseJoinColumns = {@JoinColumn(name="countyCode")})
+	@JoinColumn(name="cityCode")
 	private List<RegionCounty> regionCounties;
 
 }
