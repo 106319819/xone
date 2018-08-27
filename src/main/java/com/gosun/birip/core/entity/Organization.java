@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Entity
 @Table(name="organization")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Organization implements Serializable{
+public class Organization extends BaseEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +44,7 @@ public class Organization implements Serializable{
 	 * 组织id
 	 */
 	@Id
-	@GeneratedValue(strategy= GenerationType.TABLE)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long organizationId;
 
 	@Column(nullable=false,length=256,columnDefinition="varchar(256) comment '组织中文名称' ")
@@ -67,12 +68,6 @@ public class Organization implements Serializable{
 	@Column(nullable=false,columnDefinition="int(2) comment '人员状态 0 正常 1禁用 2删除 ' ")
 	private Integer state=0;
 
-	@Column(length=256 ,columnDefinition="varchar(256) comment '备注' ")
-	private String comment;
-
-	
-	@Column(length=20,nullable=false,columnDefinition="bigint(20) comment '创建时间' ")
-	private Long createTime;
 
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
@@ -159,25 +154,6 @@ public class Organization implements Serializable{
 		this.state = state;
 	}
 
-	public String getComment()
-	{
-		return comment;
-	}
-
-	public void setComment(String comment)
-	{
-		this.comment = comment;
-	}
-
-	public Long getCreateTime()
-	{
-		return createTime;
-	}
-
-	public void setCreateTime(Long createTime)
-	{
-		this.createTime = createTime;
-	}
 
 	public List<Person> getPersons()
 	{

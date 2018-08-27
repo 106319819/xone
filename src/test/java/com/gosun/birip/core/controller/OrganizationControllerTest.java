@@ -36,7 +36,6 @@ public class OrganizationControllerTest extends SpringBootBaseTest
 			organization.setOrganizationCode("00001");
 			organization.setOrganizationName("上海通联股份有限公司云南分公司");
 			organization.setParentId(0L);
-			organization.setCreateTime(System.currentTimeMillis());
 			organization.setLevel(0);
 			organization.setOrganizationNameEn("上海通联股份有限公司云南分公司");
 			organization.setSortNo(0L);

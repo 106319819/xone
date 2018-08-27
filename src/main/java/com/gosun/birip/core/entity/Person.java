@@ -34,14 +34,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @history
  */
 @Entity
-@Table(name="person")
-public class Person implements Serializable{
+@Table(name="Person")
+public class Person extends BaseEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long personId;
 
 
@@ -111,10 +111,6 @@ public class Person implements Serializable{
 
 	@Column(length=256,columnDefinition="varchar(256) comment '邮箱'  ")
 	private String email;
-
-
-	@Column(nullable=false,columnDefinition="int comment '创建日期'  ")
-	private Long createTime;
 
 	
 	@JsonIgnore
@@ -202,12 +198,6 @@ public class Person implements Serializable{
 	public String getEmail()
 	{
 		return email;
-	}
-
-
-	public Long getCreateTime()
-	{
-		return createTime;
 	}
 
 

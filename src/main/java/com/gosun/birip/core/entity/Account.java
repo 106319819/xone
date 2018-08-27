@@ -27,12 +27,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name="account")
-public class Account implements Serializable{
+public class Account extends BaseEntity implements Serializable{
 
 	private static final long serialVersionUID = 8131723396319234027L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long accountId;
 	
 	@Column(nullable=false,length=64, columnDefinition="varchar(64) comment '登录账号'")
@@ -44,11 +44,6 @@ public class Account implements Serializable{
 	@Column(nullable=false,columnDefinition="int(2) comment '账号状态 0未激活 1激活 2禁用 3删除'")
 	private Integer status = 0;
 
-	@Column(nullable=false,columnDefinition="int comment '创建时间' ")
-	private Long createTime;
-
-	@Column(length=256,columnDefinition="varchar(256) comment '备注' ")
-	private String comment;
 	
 	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)
@@ -96,25 +91,5 @@ public class Account implements Serializable{
 		this.status = status;
 	}
 
-	public Long getCreateTime()
-	{
-		return createTime;
-	}
-
-	public void setCreateTime(Long createTime)
-	{
-		this.createTime = createTime;
-	}
-
-	public String getComment()
-	{
-		return comment;
-	}
-
-	public void setComment(String comment)
-	{
-		this.comment = comment;
-	}
-	
 	
 }

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Table(name="PersonRelations")
 //@org.hibernate.annotations.Table(appliesTo="PERSON_RELATIONS" ,comment="人员关系表")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PersonRelations implements Serializable{
+public class PersonRelations extends BaseEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,7 +34,7 @@ public class PersonRelations implements Serializable{
 	 * 组织人员id
 	 */
 	@Id
-	@GeneratedValue(strategy= GenerationType.TABLE)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long relationsId;
 
 	/**

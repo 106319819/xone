@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,16 +14,18 @@ import org.springframework.stereotype.Service;
 import com.gosun.birip.core.entity.Organization;
 import com.gosun.birip.core.repository.OrganizationRespository;
 import com.gosun.birip.core.service.OrganizationService;
+
 @Service
-public class OrganizationServiceImpl implements OrganizationService
+public class OrganizationServiceImpl  implements OrganizationService
 {
+	private static Logger logger = LoggerFactory.getLogger(OrganizationServiceImpl.class);
 	@Autowired
 	private OrganizationRespository organizationRespository;
 
+	
 	public void create(Organization organization)
 	{
 		organizationRespository.save(organization);
-		//organization.setSortNo(organization.getOrganizationId());
 	}
 	
 	public Organization findById(Long organizationId)
@@ -56,7 +60,6 @@ public class OrganizationServiceImpl implements OrganizationService
 		organizationRespository.deleteByParentId(organizationId);
 		organizationRespository.deleteById(organizationId);
 	}
-	
 
 
 }
