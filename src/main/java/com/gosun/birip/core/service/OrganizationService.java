@@ -14,8 +14,11 @@ public interface OrganizationService
 	public Organization findById(Long organizationId);
 	public void update(Organization organization);
 	public void delete(Long organizationId);
+	public void deleteByParentId(Long parentId);
 	public Page<Organization> findAll(Pageable page);
 	public List<Organization> findByParentId(Long parentId);
 	public List<Organization> findByPersonId(Long personId);
+	
+	
 	
 }

@@ -1,10 +1,6 @@
 package com.gosun.birip.core.entity;
 
-/* Code Generator Information.
- * generator Version 1.0.0 release 2007/10/10
- * generated Date Wed Aug 15 11:15:11 CST 2018
- */
-import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,16 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import lombok.Data;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 @Entity
 @Table(name="RegionCity")
-public class RegionCity implements Serializable{
+public class RegionCity {
 
 	@Id
 	@Column(columnDefinition="char(6) comment '城市编码' ")
@@ -33,15 +31,14 @@ public class RegionCity implements Serializable{
 	@Column(columnDefinition="varchar(32) comment'拼音码'  ")
 	private String chineseCode;
 
-	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="proviceCode")
 	private RegionProvince regionProvince;
 	
-	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
 	//@JoinTable(name="RegionCounty",joinColumns= {@JoinColumn(name="cityCode")}, inverseJoinColumns = {@JoinColumn(name="countyCode")})
 	@JoinColumn(name="cityCode")
 	private List<RegionCounty> regionCounties;
+	
 
 }

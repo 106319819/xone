@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gosun.birip.common.BiripException;
 import com.gosun.birip.common.Result;
 import com.gosun.birip.common.Util;
 import com.gosun.birip.core.entity.Organization;
 import com.gosun.birip.core.service.OrganizationService;
+
 
 @RestController
 @RequestMapping("/organization")
@@ -29,14 +31,27 @@ public class OrganizationController
 		organizationService.create(organization);
 		return Result.success(organization);
 	}
+	@RequestMapping("/update")
+	public Result<?> update(@RequestBody Organization organization){
+		organizationService.update(organization);
+		return Result.success(organization);
+	}
+	
 	@RequestMapping("/find-all")
-	public Result<?> findAll(@RequestBody String content) throws IOException{
+	public Result<?> findAll(@RequestBody String content) throws IOException, BiripException{
 		Pageable pageable = Util.parse(content);
 		Page<Organization> result = organizationService.findAll(pageable);
 		return Result.success(result, result.getContent());
 	}
 	
-	@RequestMapping("find-by-parent/{parentId}")
+	
+	@RequestMapping("/find-by-id/{organizationId}")
+	public Result<?> findByOrganizationId(@PathVariable("organizationId") Long organizationId){
+		Organization result = organizationService.findById(organizationId);
+		return Result.success(result);
+	}
+	
+	@RequestMapping("/find-by-parent/{parentId}")
 	public Result<?> findByParentId(@PathVariable("parentId") Long parentId){
 		List<Organization> result = organizationService.findByParentId(parentId);
 		return Result.success(result);
@@ -46,6 +61,13 @@ public class OrganizationController
 	public Result<?> delete(@PathVariable("organizationId") Long organizationId){
 		organizationService.delete(organizationId);
 		return Result.success(organizationId);
+		
+	}
+	
+	@RequestMapping("delete-by-parentId/{parentId}")
+	public Result<?> deleteByParentId(@PathVariable("parentId") Long parentId){
+		organizationService.deleteByParentId(parentId);
+		return Result.success(parentId);
 		
 	}
 }

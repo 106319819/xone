@@ -17,7 +17,7 @@ public class ExceptionController
 		if( (e instanceof BiripException) ){
 			exception = (BiripException)e;
 		}else{
-			exception = BiripException.instance(Errors.SYS_ERROR, e);
+			exception = BiripException.instance(Error.SYS_ERROR, e);
 		}
 		
 		return Result.error(exception);
@@ -27,7 +27,7 @@ public class ExceptionController
 	{
 		e.printStackTrace();
 		
-		BiripException exception = BiripException.instance(Errors.SYS_RUNTIME_ERROR, e);
+		BiripException exception = BiripException.instance(Error.SYS_RUNTIME_ERROR, e);
 		
 		return Result.error(exception);
 	}

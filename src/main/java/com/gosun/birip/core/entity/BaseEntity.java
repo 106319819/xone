@@ -10,6 +10,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Data;
+
 /**
  * 账号信息表
  * <pre>
@@ -21,9 +23,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  * @date 2018年8月26日 下午3:12:17
  * @history
  */
+@Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract  class BaseEntity{
+public abstract  class BaseEntity {
 
 	@CreatedDate
 	@Column(columnDefinition="datetime comment '创建时间' ")
@@ -37,39 +40,4 @@ public abstract  class BaseEntity{
 	private String comment;
 
 	
-	public Date getCreateTime()
-	{
-		return createTime;
-	}
-
-
-	public void setCreateTime(Date createTime)
-	{
-		this.createTime = createTime;
-	}
-
-
-	public Date getUpdateTime()
-	{
-		return updateTime;
-	}
-
-
-	public void setUpdateTime(Date updateTime)
-	{
-		this.updateTime = updateTime;
-	}
-
-
-	public String getComment()
-	{
-		return comment;
-	}
-
-
-	public void setComment(String comment)
-	{
-		this.comment = comment;
-	}	
-		
 }

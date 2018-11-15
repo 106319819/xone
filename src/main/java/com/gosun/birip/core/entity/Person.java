@@ -4,7 +4,6 @@ package com.gosun.birip.core.entity;
  * generator Version 1.0.0 release 2007/10/10
  * generated Date Tue Aug 14 15:19:48 CST 2018
  */
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,7 +18,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 /**
@@ -33,12 +38,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @date 2018年8月26日 下午3:12:49
  * @history
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
+@EqualsAndHashCode(callSuper = false)
+@DynamicInsert
+@DynamicUpdate
 @Entity
 @Table(name="Person")
-public class Person extends BaseEntity implements Serializable{
-
-	private static final long serialVersionUID = 1L;
-
+public class Person extends BaseEntity{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -113,92 +120,14 @@ public class Person extends BaseEntity implements Serializable{
 	private String email;
 
 	
-	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="PersonRelations",joinColumns = {@JoinColumn(name="personId")},inverseJoinColumns= {@JoinColumn(name="organizationId")})
 	private List<Organization> organizations;
 	
-	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="accountId")
 	private Account account;
 	
-	public Long getPersonId()
-	{
-		return personId;
-	}
-
-
-	public String getPersonCode()
-	{
-		return personCode;
-	}
-
-
-	public String getFullName()
-	{
-		return fullName;
-	}
-
-
-	public String getAliasName()
-	{
-		return aliasName;
-	}
-
-
-	public String getFirstName()
-	{
-		return firstName;
-	}
-
-
-	public String getLastName()
-	{
-		return lastName;
-	}
-
-
-	public String getIdentityNo()
-	{
-		return identityNo;
-	}
-
-
-	public String getSex()
-	{
-		return sex;
-	}
-
-
-	public String getBirthday()
-	{
-		return birthday;
-	}
-
-
-	public String getNationalityCode()
-	{
-		return nationalityCode;
-	}
-
-
-	public String getCountyCode()
-	{
-		return countyCode;
-	}
-
-
-	public String getMobile()
-	{
-		return mobile;
-	}
-
-
-	public String getEmail()
-	{
-		return email;
-	}
-
+	
 
 }

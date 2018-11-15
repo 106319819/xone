@@ -2,12 +2,14 @@ package com.gosun.birip.common;
 
 import java.util.EnumMap;
 
-public enum Errors
+public enum Error
 {
-	SYS_UNKNOW("未知命令"),
+	SYS_UNKNOW("未知命令"),	
 	SYS_ERROR("系统错误"),
 	SYS_RUNTIME_ERROR("运行时异常"),
-	GET_LOGINUSER( "取平台用户信息错误"),
+	NO_LOGIN("未登录"),
+	NO_FOUND_USER( "用户不存在"),
+	ERROR_PASSWORD("密码错误"),
 	PARAM_MISSING( "缺少参数"),
 	DB_DS_CLOSE( "关闭数据源错误"),
 	DB_STMT_CLOSE( "关闭statement错误"),
@@ -27,23 +29,26 @@ public enum Errors
 	FILE_UPLOAD("文件上传失败"),
 	STREAM_CLOSE("关闭stream错误"),
 	VALIDATE_ERROR("校验失败"),
-	SOA_INVOKE("服务调用失败");
-	private static EnumMap<Errors,String> enumMap = new EnumMap<Errors,String>(Errors.class);
+	SOA_INVOKE("服务调用失败"),
+	ERR_PARAM("参数错误"),
+	DATA_NO_FOUND("数据不存在");
+	private static EnumMap<Error,String> enumMap = new EnumMap<Error,String>(Error.class);
 	static {
 		
-		Errors[] enums = Errors.values();
-		for(Errors e : enums){
+		Error[] enums = Error.values();
+		for(Error e : enums){
 			enumMap.put(e, e.value);
 		}
 	}
 	private String value;
-	Errors(String value){
+	Error(String value){
 		this.value = value;
 	}
-	public static String getError(Errors value, String message) {
-		String err = Errors.enumMap.get(value);
+	public static String getError(Error value, String message) {
+		String err = Error.enumMap.get(value);
 		//return String.format("%04d ", value.ordinal()) + err + " - " + message;
-		return err + " - " + message;
+		
+		return  (null == message) ? err : (err + " - " + message);
 	}
 	
 }

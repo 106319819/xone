@@ -1,6 +1,5 @@
 package com.gosun.birip.core.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,13 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 应用信息表
@@ -28,11 +30,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @date 2018年8月26日 下午3:12:17
  * @history
  */
+@Data
+@EqualsAndHashCode(callSuper=false)
+@DynamicInsert
+@DynamicUpdate
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name="application")
-public class Application extends BaseEntity implements Serializable{
+public class Application extends BaseEntity{
 
-	private static final long serialVersionUID = 8131723396319234027L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -46,10 +52,8 @@ public class Application extends BaseEntity implements Serializable{
 	
 	@Column(nullable=false,columnDefinition="int(2) comment '状态 0未激活 1激活 2禁用 3删除'")
 	private Integer status = 0;
-
 	
-	//
-	@JsonIgnore
+	//应用所属子系统
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="subSystemId")
 	private SubSystem subSystem;

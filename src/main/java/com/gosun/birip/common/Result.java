@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 public class Result<T>
 {
 	/**
@@ -30,16 +33,16 @@ public class Result<T>
 		private Integer page;
 		private Integer size;
 		private Integer total;
-		private List<T> conent;
+		private List<T> content;
 		public PageResult(Integer page,Integer size,Integer total,List<T> list){
 			this.page = page;
 			this.size = size;
 			this.total = total;
-			this.conent = list;
+			this.content = list;
 		}
 		
 		public PageResult(List<T> list){
-			this.conent = list;
+			this.content = list;
 		}
 		
 		public Integer getPage()
@@ -66,67 +69,18 @@ public class Result<T>
 		{
 			this.total = total;
 		}
-		public List<T> getConent()
-		{
-			return conent;
+
+		public List<T> getContent() {
+			return content;
 		}
-		public void setConent(List<T> conent)
-		{
-			this.conent = conent;
+
+		public void setContent(List<T> content) {
+			this.content = content;
 		}
-		
+				
 		
 	}
 	
-	public String getStatus()
-	{
-		return status;
-	}
-
-	public void setStatus(String status)
-	{
-		this.status = status;
-	}
-
-	public String getError()
-	{
-		return error;
-	}
-
-	public void setError(String error)
-	{
-		this.error = error;
-	}
-
-	public String getMessage()
-	{
-		return message;
-	}
-
-	public void setMessage(String message)
-	{
-		this.message = message;
-	}
-
-	public String getSign()
-	{
-		return sign;
-	}
-
-	public void setSign(String sign)
-	{
-		this.sign = sign;
-	}
-
-	public T getData()
-	{
-		return data;
-	}
-
-	public void setData(T data)
-	{
-		this.data = data;
-	}
 
 	public static <T> Result< T > success(T data){
 		

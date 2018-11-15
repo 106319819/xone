@@ -10,12 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 
 /**
  * 子系统信息表
@@ -28,11 +30,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @date 2018年8月26日 下午3:12:17
  * @history
  */
+@Data
+@EqualsAndHashCode( callSuper = false)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name="SubSystem")
-public class SubSystem extends BaseEntity implements Serializable{
+public class SubSystem extends BaseEntity{
 
-	private static final long serialVersionUID = 8131723396319234027L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -48,7 +52,6 @@ public class SubSystem extends BaseEntity implements Serializable{
 	private Integer status = 0;
 
 	//
-	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
 	//@JoinTable(name="Application" ,joinColumns= {@JoinColumn(name="subSystemId")},inverseJoinColumns= {@JoinColumn(name="applicationId")} )
 	@JoinColumn(name="subSystemId")

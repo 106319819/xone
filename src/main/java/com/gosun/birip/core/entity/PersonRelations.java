@@ -1,6 +1,5 @@
 package com.gosun.birip.core.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 人员关系表
@@ -22,13 +27,16 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * @date 2018年8月26日 下午3:13:05
  * @history
  */
+@Data
+@EqualsAndHashCode( callSuper = false)
+@DynamicInsert
+@DynamicUpdate
 @Entity
 @Table(name="PersonRelations")
 //@org.hibernate.annotations.Table(appliesTo="PERSON_RELATIONS" ,comment="人员关系表")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PersonRelations extends BaseEntity implements Serializable{
+public class PersonRelations extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 组织人员id
