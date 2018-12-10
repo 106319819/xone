@@ -183,6 +183,15 @@ public class Result<T>
 	 * @param list
 	 * @return
 	 */
+	public static <T> Result<?>  success(Page<T> page){
+		return Result.success(page, page.getContent());
+	}
+	/**
+	 * 当返回分页记录时调用
+	 * @param page
+	 * @param list
+	 * @return
+	 */
 	public static <T> Result<?>  success(Page<T> page,List<T> list){
 		
 		Result < PageResult<T> > result = new Result< PageResult<T> >();
