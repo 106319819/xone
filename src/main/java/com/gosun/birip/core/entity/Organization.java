@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -49,7 +50,9 @@ public class Organization extends BaseEntity{
 	 * 组织id
 	 */
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	//@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "biripIdentityGenerator") 
+	@GenericGenerator(name = "biripIdentityGenerator", strategy = "com.gosun.birip.core.utils.BiripIdentityGenerator")
 	private Long organizationId;
 
 	@Column(nullable=false,length=256,columnDefinition="varchar(256) comment '组织中文名称' ")

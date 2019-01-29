@@ -70,7 +70,7 @@ import com.gosun.birip.uid.exception.UidGenerateException;
 		<!--<property name="rejectedTakeBufferHandler" ref="XxxxYourTakeRejectPolicy"></property>--> 
  * @author yutianbao
  */
-@Service
+@Component
 public class CachedUidGenerator extends DefaultUidGenerator implements DisposableBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(CachedUidGenerator.class);
     private static final int DEFAULT_BOOST_POWER = 3;
