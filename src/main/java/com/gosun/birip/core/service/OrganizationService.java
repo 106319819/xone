@@ -15,6 +15,7 @@ public interface OrganizationService
 	public void update(Organization organization);
 	public void delete(Long organizationId);
 	public void deleteByParentId(Long parentId);
+	public void deleteByOrganizationId(List<Long> list);
 	public Page<Organization> findAll(Pageable page);
 	public List<Organization> findByParentId(Long parentId);
 	public List<Organization> findByPersonId(Long personId);

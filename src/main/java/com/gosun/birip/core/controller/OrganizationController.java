@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,6 +69,13 @@ public class OrganizationController
 	public Result<?> deleteByParentId(@PathVariable("parentId") Long parentId){
 		organizationService.deleteByParentId(parentId);
 		return Result.success(parentId);
+		
+	}
+	
+	@PostMapping("/delete-batch")
+	public Result<?> deleteBatch(@RequestBody List<Long> organizationIdList){
+		organizationService.deleteByOrganizationId(organizationIdList);
+		return Result.success(organizationIdList);
 		
 	}
 }

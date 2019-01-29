@@ -98,5 +98,15 @@ public class OrganizationServiceImpl  implements OrganizationService
 		
 	}
 
+	@Transactional
+	public void deleteByOrganizationId(List<Long> list) {
+		// TODO Auto-generated method stub
+		Iterator<Long> it = list.iterator();
+		while(it.hasNext()) {
+			Long organizationId = it.next();
+			this.delete(organizationId);
+		}
+	}
+
 
 }
