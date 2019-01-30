@@ -10,6 +10,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -42,7 +43,8 @@ public class PersonRelations extends BaseEntity {
 	 * 组织人员id
 	 */
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "biripIdentityGenerator") 
+	@GenericGenerator(name = "biripIdentityGenerator", strategy = "com.gosun.birip.core.utils.BiripIdentityGenerator")
 	private Long relationsId;
 
 	/**
@@ -52,10 +54,10 @@ public class PersonRelations extends BaseEntity {
 	@Column(nullable=false , columnDefinition="int(2) comment '在编状态 0不在编 1在编 2移除本组织'")
 	private Integer active;
 	
-	@Column(nullable=false , columnDefinition="int comment '人员id，引用person表主键'")
+	@Column(nullable=false , columnDefinition="bigint comment '人员id，引用person表主键'")
 	private Long personId;
 	
-	@Column(nullable=false , columnDefinition="int comment '组织id，引用organization表主键'")
+	@Column(nullable=false , columnDefinition="bigint comment '组织id，引用organization表主键'")
 	private Long organizationId;
 	
 	

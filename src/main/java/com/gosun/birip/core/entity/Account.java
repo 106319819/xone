@@ -57,7 +57,7 @@ public class Account extends BaseEntity{
 	private String accountType="0";
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="personId", columnDefinition="int comment '引用person表的persion_id' ")
+	@JoinColumn(name="personId", columnDefinition="bigint comment '引用person表的persion_id' ")
 	private Person person;
 
 	
