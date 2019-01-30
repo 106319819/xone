@@ -21,7 +21,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -70,7 +69,7 @@ import com.gosun.birip.uid.exception.UidGenerateException;
 		<!--<property name="rejectedTakeBufferHandler" ref="XxxxYourTakeRejectPolicy"></property>--> 
  * @author yutianbao
  */
-@Component
+@Service
 public class CachedUidGenerator extends DefaultUidGenerator implements DisposableBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(CachedUidGenerator.class);
     private static final int DEFAULT_BOOST_POWER = 3;

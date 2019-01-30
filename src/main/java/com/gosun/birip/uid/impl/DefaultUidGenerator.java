@@ -60,6 +60,7 @@ import com.gosun.birip.uid.worker.WorkerIdAssigner;
  *
  * @author yutianbao
  */
+@Service
 public class DefaultUidGenerator implements UidGenerator, InitializingBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultUidGenerator.class);
 

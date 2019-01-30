@@ -21,7 +21,9 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -58,7 +60,7 @@ public class Organization extends BaseEntity{
 	@Column(nullable=false,length=256,columnDefinition="varchar(256) comment '组织中文名称' ")
 	private String organizationName;
 
-	@Column(unique=true,length=64,columnDefinition="varchar(64) comment '组织编码64位长度 可以自定义默认为organizationId' ")
+	@Column(unique=true,length=256,columnDefinition="varchar(256) comment '组织编码64位长度 可以自定义默认为organizationId' ")
 	private String organizationCode;
 
 	@Column(length=256,columnDefinition="varchar(256) comment '组织英文名称，默认与中文名称一致' ")
@@ -70,7 +72,7 @@ public class Organization extends BaseEntity{
 	@Column(nullable=false,columnDefinition="int comment '排序索引，默认设置为organizationId' ")
 	private Long sortNo = 0L;
 	
-	@Column(columnDefinition="int comment '上级组织的organizationId' ")
+	@Column(columnDefinition="bigint comment '上级组织的organizationId' ")
 	private Long parentId;
 
 	@Column(nullable=false,columnDefinition="int(2) comment '状态 0 正常 1禁用 2删除 ' ")

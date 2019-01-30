@@ -15,7 +15,6 @@
  */
 package com.gosun.birip.uid;
 
-import org.springframework.stereotype.Service;
 
 import com.gosun.birip.uid.exception.UidGenerateException;
 
@@ -24,7 +23,6 @@ import com.gosun.birip.uid.exception.UidGenerateException;
  *
  * @author yutianbao
  */
-@Service
 public interface UidGenerator {
 
     /**
