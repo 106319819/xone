@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gosun</groupId>
-	<artifactId>birip</artifactId>
+	<artifactId>xone</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>基础信息资源整合平台</name>
 	<description>basic information resources intergration platform 基础信息资源整合平台</description>
