@@ -6,8 +6,8 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentityGenerator;
 import org.springframework.stereotype.Component;
 
-import com.gosun.xone.common.SpringContextUtil;
-import com.gosun.xone.uid.impl.CachedUidGenerator;
+import com.gosun.common.SpringContextUtil;
+import com.gosun.uid.impl.CachedUidGenerator;
 @Component
 public class BiripIdentityGenerator extends IdentityGenerator {
 	@Override

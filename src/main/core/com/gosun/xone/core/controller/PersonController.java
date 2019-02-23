@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gosun.xone.common.BiripException;
-import com.gosun.xone.common.Result;
-import com.gosun.xone.common.Util;
+import com.gosun.common.BiripException;
+import com.gosun.common.Result;
+import com.gosun.common.Util;
 import com.gosun.xone.core.entity.Person;
 import com.gosun.xone.core.service.PersonService;
 

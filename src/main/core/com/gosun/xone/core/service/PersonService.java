@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.gosun.xone.common.BiripException;
+import com.gosun.common.BiripException;
 import com.gosun.xone.core.entity.Organization;
 import com.gosun.xone.core.entity.Person;
 

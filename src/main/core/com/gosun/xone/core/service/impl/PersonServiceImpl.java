@@ -10,8 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.gosun.xone.common.BiripException;
-import com.gosun.xone.common.Error;
+import com.gosun.common.BiripException;
+import com.gosun.common.Error;
 import com.gosun.xone.core.entity.Organization;
 import com.gosun.xone.core.entity.Person;
 import com.gosun.xone.core.entity.PersonRelations;

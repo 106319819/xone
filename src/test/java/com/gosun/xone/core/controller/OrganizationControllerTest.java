@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gosun.xone.SpringBootBaseTest;
+import com.gosun.SpringBootBaseTest;
 import com.gosun.xone.core.entity.Organization;
 
 
