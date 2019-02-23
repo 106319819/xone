@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.gosun.common.SpringContextUtil;
 import com.gosun.uid.impl.CachedUidGenerator;
 @Component
-public class BiripIdentityGenerator extends IdentityGenerator {
+public class XoneIdentityGenerator extends IdentityGenerator {
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object object) {
 		// TODO Auto-generated method stub

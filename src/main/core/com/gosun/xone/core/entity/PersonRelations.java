@@ -49,8 +49,8 @@ public class PersonRelations extends BaseEntity {
 	 * 组织人员id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "biripIdentityGenerator") 
-	@GenericGenerator(name = "biripIdentityGenerator", strategy = "com.gosun.birip.core.utils.BiripIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long relationsId;
 
 	/**

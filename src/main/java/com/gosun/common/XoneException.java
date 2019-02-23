@@ -4,7 +4,7 @@ package com.gosun.common;
  * @author Administrator
  *
  */
-public class BiripException extends Exception
+public class XoneException extends Exception
 {
 	private Throwable cause;
 	/**
@@ -38,67 +38,67 @@ public class BiripException extends Exception
 		return Error.getError(error, msg);
 	}
 
-	public BiripException()
+	public XoneException()
 	{
 		super();
 	}
-	public BiripException(Error error,String message, Throwable cause)
+	public XoneException(Error error,String message, Throwable cause)
 	{
 		super(message, cause);
 		this.error = error;
 		this.cause = cause;
 	}
-	public BiripException(Error error,String message)
+	public XoneException(Error error,String message)
 	{
 		super(message);
 		this.error = error;
 	}
-	public BiripException(Error error,Integer message)
+	public XoneException(Error error,Integer message)
 	{
 		super(String.valueOf(message));
 		this.error = error;
 	}
-	public BiripException(Error error,Throwable cause)
+	public XoneException(Error error,Throwable cause)
 	{
 		super(cause);
 		this.error = error;
 		this.cause = cause;
 	}
-	public BiripException(Error error)
+	public XoneException(Error error)
 	{
 		super();
 		this.error = error;
 		
 	}
-	public BiripException(Throwable cause)
+	public XoneException(Throwable cause)
 	{
 		super(cause);
 	}
 	
-	public static void throwing(Error error,Throwable cause) throws BiripException{
-		throw new BiripException(error,cause);
+	public static void throwing(Error error,Throwable cause) throws XoneException{
+		throw new XoneException(error,cause);
 	}
-	public static void throwing(Error error,String message, Throwable cause) throws BiripException{
-		BiripException e = new BiripException(error,message,cause);
+	public static void throwing(Error error,String message, Throwable cause) throws XoneException{
+		XoneException e = new XoneException(error,message,cause);
 		throw e;
 	}
-	public static void throwing(Throwable cause) throws BiripException{
-		throw new BiripException(cause);
+	public static void throwing(Throwable cause) throws XoneException{
+		throw new XoneException(cause);
 	}
 	
-	public static void throwing(Error error) throws BiripException{
-		throw new BiripException(error);
+	public static void throwing(Error error) throws XoneException{
+		throw new XoneException(error);
 	}
-	public static void throwing(Error error,String message)throws BiripException{
-		throw new BiripException(error,message);
+	public static void throwing(Error error,String message)throws XoneException{
+		throw new XoneException(error,message);
 	}
 	
-	public static BiripException instance(Error error, Exception e){
-		BiripException inst = new BiripException(error,e);
+	public static XoneException instance(Error error, Exception e){
+		XoneException inst = new XoneException(error,e);
 		return inst;
 	}
-	public static BiripException instance(Error error){
-		BiripException  inst = new BiripException(error);
+	public static XoneException instance(Error error){
+		XoneException  inst = new XoneException(error);
 		return inst;
 	}
 }

@@ -41,8 +41,8 @@ public class SubSystem extends BaseEntity{
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "biripIdentityGenerator") 
-	@GenericGenerator(name = "biripIdentityGenerator", strategy = "com.gosun.birip.core.utils.BiripIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long subSystemId;
 	
 	@Column(nullable=false,length=64, columnDefinition="varchar(64) comment '子系统编码'")

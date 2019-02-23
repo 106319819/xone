@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gosun.common.BiripException;
+import com.gosun.common.XoneException;
 import com.gosun.common.Result;
 import com.gosun.common.Util;
 import com.gosun.xone.core.entity.Person;
@@ -37,7 +37,7 @@ public class PersonController {
 		return Result.success(person);
 	}
 	@RequestMapping("/find-all")
-	public Result<?> findAll(@RequestBody String content) throws IOException, BiripException{
+	public Result<?> findAll(@RequestBody String content) throws IOException, XoneException{
 		Pageable pageable = Util.parse(content);
 		Page<Person> result = personService.findAll(pageable);
 		return Result.success(result, result.getContent());
@@ -66,7 +66,7 @@ public class PersonController {
 		return Result.success(result);
 	}
 	@PostMapping("/update")
-	public Result<?> update(@RequestBody Person person) throws BiripException{
+	public Result<?> update(@RequestBody Person person) throws XoneException{
 		personService.update(person);
 		return Result.success(person);
 	}

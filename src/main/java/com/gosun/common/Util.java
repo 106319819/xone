@@ -58,7 +58,7 @@ public class Util
 
 	private static Logger logger = LoggerFactory.getLogger(Util.class);
 	
-	public static Pageable parse(String content) throws BiripException{
+	public static Pageable parse(String content) throws XoneException{
 		ObjectMapper mapper = new ObjectMapper();
 		Pageable pageable = null;
 		JsonNode root = null;
@@ -66,13 +66,13 @@ public class Util
 			root = mapper.readTree(content);
 			pageable = Util.parse(root);
 		} catch (IOException e) {
-			BiripException.throwing(Error.PARAM_JSON, e);
+			XoneException.throwing(Error.PARAM_JSON, e);
 		}
 		
 		return pageable;
 	}
 	
-	public static Pageable parse(JsonNode root) throws BiripException{
+	public static Pageable parse(JsonNode root) throws XoneException{
 		Pageable pageable = null;
 		String pk = "page";
 		String sk = "size";
@@ -107,7 +107,7 @@ public class Util
 		return pageable;
 	}
 	
-	public static Pageable parseSorts(Pageable pageable, JsonNode sorts) throws BiripException {
+	public static Pageable parseSorts(Pageable pageable, JsonNode sorts) throws XoneException {
 
 		// {sorts : [{direction:"ASC",property:"field"}]}
 		String dk = "direction";
@@ -2401,22 +2401,22 @@ public class Util
 		return false;
 	}
 	
-	public static JsonNode parseJSON(String json) throws BiripException {
+	public static JsonNode parseJSON(String json) throws XoneException {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			return mapper.readTree(json);
 		} catch (IOException e) {
-			BiripException.throwing(Error.PARAM_JSON,e);
+			XoneException.throwing(Error.PARAM_JSON,e);
 		}
 		return null;
 	}
 	
-	public static <T> String buildJSON(T value) throws BiripException {
+	public static <T> String buildJSON(T value) throws XoneException {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			return mapper.writeValueAsString(value);
 		} catch (JsonProcessingException e) {
-			BiripException.throwing(Error.PARAM_JSON,e);
+			XoneException.throwing(Error.PARAM_JSON,e);
 		}
 		return null;
 	}

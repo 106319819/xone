@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.gosun.common.BiripException;
+import com.gosun.common.XoneException;
 import com.gosun.xone.core.entity.Organization;
 import com.gosun.xone.core.entity.SubSystem;
 
@@ -20,6 +20,6 @@ public interface SubSystemService
 	public void deleteById(Long subSystemId);
 	
 	public void deleteByIdList(List<Long> subSystemIds);
-	public void update(SubSystem subSystem) throws BiripException;
+	public void update(SubSystem subSystem) throws XoneException;
 	
 }

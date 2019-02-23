@@ -46,8 +46,8 @@ public class Organization extends BaseEntity{
 	 */
 	@Id
 	//@GeneratedValue(strategy= GenerationType.AUTO)
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "biripIdentityGenerator") 
-	@GenericGenerator(name = "biripIdentityGenerator", strategy = "com.gosun.birip.core.utils.BiripIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long organizationId;
 
 	@Column(nullable=false,length=256,columnDefinition="varchar(256) comment '组织中文名称' ")

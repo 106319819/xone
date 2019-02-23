@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gosun.common.BiripException;
+import com.gosun.common.XoneException;
 import com.gosun.common.Result;
 import com.gosun.common.Util;
 import com.gosun.xone.core.entity.Account;
@@ -29,7 +29,7 @@ public class AccountController {
 		return Result.success(Account);
 	}
 	@RequestMapping("/find-all")
-	public Result<?> findAll(@RequestBody String content) throws IOException, BiripException{
+	public Result<?> findAll(@RequestBody String content) throws IOException, XoneException{
 		Pageable pageable = Util.parse(content);
 		Page<Account> result = accountService.findAll(pageable);
 		return Result.success(result, result.getContent());

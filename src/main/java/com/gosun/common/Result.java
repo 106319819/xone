@@ -216,8 +216,8 @@ public class Result<T>
 	 * @param e
 	 * @return
 	 */
-	public static Result< BiripException > error(BiripException e){
-		Result<BiripException> result = new Result<BiripException>();
+	public static Result< XoneException > error(XoneException e){
+		Result<XoneException> result = new Result<XoneException>();
 		result.status = "fail";
 		result.code = e.getError();
 		result.message = e.getMessage();

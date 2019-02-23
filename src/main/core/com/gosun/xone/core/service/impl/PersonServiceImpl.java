@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.gosun.common.BiripException;
+import com.gosun.common.XoneException;
 import com.gosun.common.Error;
 import com.gosun.xone.core.entity.Organization;
 import com.gosun.xone.core.entity.Person;
@@ -73,10 +73,10 @@ public class PersonServiceImpl implements PersonService
 	}
 
 	@Override
-	public void update(Person person) throws BiripException {
+	public void update(Person person) throws XoneException {
 		// TODO Auto-generated method stub
 		if(!this.personRespository.existsById(person.getPersonId())) {
-			BiripException.throwing(Error.DATA_NO_FOUND);
+			XoneException.throwing(Error.DATA_NO_FOUND);
 		}
 		this.personRespository.save(person);
 	}

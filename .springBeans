@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.gosun.BiripApplication</config>
+		<config>java:com.gosun.XoneApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

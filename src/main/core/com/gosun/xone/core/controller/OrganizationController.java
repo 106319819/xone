@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gosun.common.BiripException;
+import com.gosun.common.XoneException;
 import com.gosun.common.Result;
 import com.gosun.common.Util;
 import com.gosun.xone.core.entity.Organization;
@@ -39,7 +39,7 @@ public class OrganizationController
 	}
 	
 	@RequestMapping("/find-all")
-	public Result<?> findAll(@RequestBody String content) throws IOException, BiripException{
+	public Result<?> findAll(@RequestBody String content) throws IOException, XoneException{
 		Pageable pageable = Util.parse(content);
 		Page<Organization> result = organizationService.findAll(pageable);
 		return Result.success(result, result.getContent());

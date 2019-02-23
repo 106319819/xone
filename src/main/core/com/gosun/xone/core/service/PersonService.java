@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.gosun.common.BiripException;
+import com.gosun.common.XoneException;
 import com.gosun.xone.core.entity.Organization;
 import com.gosun.xone.core.entity.Person;
 
@@ -20,6 +20,6 @@ public interface PersonService
 	public void deleteById(Long personId);
 	
 	public void deleteByIdList(List<Long> personIds);
-	public void update(Person person) throws BiripException;
+	public void update(Person person) throws XoneException;
 	
 }

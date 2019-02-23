@@ -42,8 +42,8 @@ public class Account extends BaseEntity{
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "biripIdentityGenerator") 
-	@GenericGenerator(name = "biripIdentityGenerator", strategy = "com.gosun.birip.core.utils.BiripIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long accountId;
 	
 	@Column(nullable=false,length=64, unique = true, columnDefinition="varchar(64) comment '登录账号'")

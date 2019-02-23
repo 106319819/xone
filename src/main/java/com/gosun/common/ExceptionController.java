@@ -13,11 +13,11 @@ public class ExceptionController
 	{
 		e.printStackTrace();
 		
-		BiripException exception = null;
-		if( (e instanceof BiripException) ){
-			exception = (BiripException)e;
+		XoneException exception = null;
+		if( (e instanceof XoneException) ){
+			exception = (XoneException)e;
 		}else{
-			exception = BiripException.instance(Error.SYS_ERROR, e);
+			exception = XoneException.instance(Error.SYS_ERROR, e);
 		}
 		
 		return Result.error(exception);
@@ -27,7 +27,7 @@ public class ExceptionController
 	{
 		e.printStackTrace();
 		
-		BiripException exception = BiripException.instance(Error.SYS_RUNTIME_ERROR, e);
+		XoneException exception = XoneException.instance(Error.SYS_RUNTIME_ERROR, e);
 		
 		return Result.error(exception);
 	}
