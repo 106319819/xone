@@ -23,12 +23,6 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 组织信息表
- * <pre>
- * Copyright: Copyright gosun technology Inc. 2018, All rights reserved.
- * Company: 云南戈阳科技有限公司
- * </pre>
- * @author 张尧伟
- * @version 1.0
  * @date 2018年8月26日 下午3:12:38
  * @history
  */

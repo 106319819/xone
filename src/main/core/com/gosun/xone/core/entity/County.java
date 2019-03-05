@@ -21,7 +21,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name="RegionCounty")
-public class RegionCounty{
+public class County{
 
 	@Id
 	@Column(columnDefinition="char(6) comment '县区代码' ")
@@ -35,5 +35,5 @@ public class RegionCounty{
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cityCode")
-	private RegionCity regionCity;
+	private City regionCity;
 }

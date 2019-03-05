@@ -1,17 +1,13 @@
 package com.gosun.xone.core.entity;
 
-import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,11 +19,6 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 子系统信息表
- * <pre>
- * Copyright: Copyright gosun technology Inc. 2018, All rights reserved.
- * Company: 云南戈阳科技有限公司
- * </pre>
- * @author 张尧伟
  * @version 1.0
  * @date 2018年8月26日 下午3:12:17
  * @history
@@ -60,5 +51,9 @@ public class SubSystem extends BaseEntity{
 //	@JoinColumn(name="subSystemId")
 //	private List<Application> applications;
 
-	
+	/**
+	 * 仅记录在创建子系统时，方便同时建立子系统关系时使用
+	 */
+	@Transient
+	private Long organizationId;
 }

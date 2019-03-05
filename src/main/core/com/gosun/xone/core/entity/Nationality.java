@@ -23,7 +23,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name="RegionNationality")
-public class RegionNationality{
+public class Nationality{
 
 	@Id
 	@Column(columnDefinition="char(3) comment '国家代码 ISO标准'")
@@ -48,5 +48,5 @@ public class RegionNationality{
 	@OneToMany(fetch=FetchType.LAZY)
 	//@JoinTable(name="RegionProvince", joinColumns= {@JoinColumn(name="nationalityId")},inverseJoinColumns= {@JoinColumn(name="provinceCode")})
 	@JoinColumn(name="nationalityId")
-	private List<RegionProvince> regionProvinces;
+	private List<Province> regionProvinces;
 }

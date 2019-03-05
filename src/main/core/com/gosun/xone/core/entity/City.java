@@ -19,7 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="RegionCity")
-public class RegionCity {
+public class City {
 
 	@Id
 	@Column(columnDefinition="char(6) comment '城市编码' ")
@@ -33,12 +33,12 @@ public class RegionCity {
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="proviceCode")
-	private RegionProvince regionProvince;
+	private Province regionProvince;
 	
 	@OneToMany(fetch=FetchType.LAZY)
 	//@JoinTable(name="RegionCounty",joinColumns= {@JoinColumn(name="cityCode")}, inverseJoinColumns = {@JoinColumn(name="countyCode")})
 	@JoinColumn(name="cityCode")
-	private List<RegionCounty> regionCounties;
+	private List<County> regionCounties;
 	
 
 }

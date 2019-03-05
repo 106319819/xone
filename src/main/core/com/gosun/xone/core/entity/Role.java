@@ -1,14 +1,12 @@
 package com.gosun.xone.core.entity;
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -21,12 +19,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 应用信息表
- * <pre>
- * Copyright: Copyright gosun technology Inc. 2018, All rights reserved.
- * Company: 云南戈阳科技有限公司
- * </pre>
- * @author 张尧伟
+ * 模块（菜单）信息表
  * @version 1.0
  * @date 2018年8月26日 下午3:12:17
  * @history
@@ -37,27 +30,25 @@ import lombok.EqualsAndHashCode;
 @DynamicUpdate
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-@Table(name="application")
-public class Application extends BaseEntity{
+@Table(name="Role")
+public class Role extends BaseEntity{
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
 	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
-	private Long applicationId;
+	private Long roleId;
 	
-	@Column(nullable=false,length=64, columnDefinition="varchar(64) comment '应用编码'")
-	private String code;
-	
-	@Column(nullable=false,length=256, columnDefinition="varchar(64) comment '名称'")
+	//名称
+	@Column(nullable=false,length=64)
 	private String name;
+	//排序码
+	@Column
+    private Integer sortNo;
+
+	//状态 0未激活 1激活 2禁用 3删除
+	@Column(nullable=false)
+	private Integer status;
 	
-	@Column(nullable=false,columnDefinition="int(2) comment '状态 0未激活 1激活 2禁用 3删除'")
-	private Integer status = 0;
-	
-	//应用所属子系统
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="subSystemId")
-	private SubSystem subSystem;
 	
 }

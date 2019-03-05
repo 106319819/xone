@@ -1,6 +1,7 @@
 package com.gosun.xone.core.entity;
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 账号信息表
+ * 模块（菜单）信息表
+ * @version 1.0
  * @date 2018年8月26日 下午3:12:17
  * @history
  */
@@ -28,27 +30,21 @@ import lombok.EqualsAndHashCode;
 @DynamicUpdate
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-@Table(name="account")
-public class Account extends BaseEntity{
-	
-	
+@Table(name="RoleModule")
+public class RoleModule extends BaseEntity{
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
 	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
-	private Long accountId;
+	private Long roleModuleId;
 	
-	@Column(nullable=false,length=64, unique = true, columnDefinition="varchar(64) comment '登录账号'")
-	private String accountCode;
+	//角色ID
+	@Column
+	private Long roleId;
+	//模块id
+	@Column
+    private Long moduleId;
 	
-	@Column(nullable=false,length=256, columnDefinition="varchar(64) comment '密码'")
-	private String password;
-
-	@Column(nullable=false,columnDefinition="int(2) comment '账号状态 0未激活 1激活 2禁用 3删除'")
-	private Integer status = 1;
-
-	@Column(nullable=false,columnDefinition="char(1) comment '账号类型 9超级管理员  8子系统管理员 0一般账号 ' ")
-	private String accountType="0";
-
-
 	
 }
