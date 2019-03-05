@@ -12,12 +12,12 @@ import com.gosun.xone.core.entity.SubSystem;
 public interface ModuleRespository extends JpaRepository<Module, Long>
 {
 
-	@Query("select t1 from Module t1 where t1.subSystem.subSystemId = :subSystemId"
+	@Query("select t1 from Module t1 where t1.subSystemId = :subSystemId"
 			+ " order by t1.sortNo,t1.moduleId")
 	public List<Module> findModulesBySubSystemId(Long subSystemId);
 	
-	@Query("select t1.subSystem from Module t1"
-			+ " where t1.moduleId = :moduleId")
+	@Query("select t2 from Module t1,SubSystem t2"
+			+ " where t1.subSystemId = t2.subSystemId and t1.moduleId = :moduleId")
 	public SubSystem findSubSystemByModuleId(Long moduleId);
 	
 	@Modifying

@@ -66,7 +66,7 @@ public class ModuleController {
 		return Result.success(module);
 	}
 	
-	@GetMapping("/fetch-tree-by-sub-system/{subSystemId")
+	@RequestMapping("/fetch-tree-by-sub-system/{subSystemId}")
 	public Result<?> fetchTree(@PathVariable("subSystemId") Long subSystemId) throws XoneException{
 		List<Module> modules = moduleService.fetchTreeBySubSystemId(subSystemId);
 		return Result.success(modules);

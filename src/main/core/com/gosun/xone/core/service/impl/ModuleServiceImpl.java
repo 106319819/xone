@@ -78,6 +78,10 @@ public class ModuleServiceImpl implements ModuleService
 	protected List<Module> buildTree(List<Module> modules){
 		List<Module> parents = new ArrayList<>();
 		for(Module item: modules) {
+			if(parents.contains(item)) {
+				continue;
+			}
+			
 			Long parentId = item.getParentId();
 			if(Util.isNvl(parentId) || 0L == parentId) {
 				item.setLevel(0);
@@ -95,8 +99,11 @@ public class ModuleServiceImpl implements ModuleService
 		List<Module> children = new ArrayList<>();
 		parent.setChildren(children);		
 		for(Module item: modules) {
+			if(children.contains(item)) {
+				continue;
+			}
 			Long parentId = item.getParentId();
-			if(!Util.isNvl(parentId) && parentId == parent.getModuleId()) {
+			if(!Util.isNvl(parentId) && parentId.longValue() == parent.getModuleId().longValue()) {
 				children.add(item);
 				item.setParentName(parent.getName());
 				item.setLevel(parent.getLevel() + 1);

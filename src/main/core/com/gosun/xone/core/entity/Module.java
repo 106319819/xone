@@ -51,7 +51,7 @@ public class Module extends BaseEntity{
 	private Long parentId;
 
 	//菜单URL
-	@Column(nullable=false,length=256)
+	@Column(length=256)
     private String url;
 
 	//权限标识
@@ -72,7 +72,7 @@ public class Module extends BaseEntity{
 
 	//状态 0未激活 1激活 2禁用 3删除
 	@Column(nullable=false)
-	private Integer status;
+	private Integer status=1;
 	
     // 非数据库字段
 	@Transient
@@ -86,8 +86,7 @@ public class Module extends BaseEntity{
 	
 	
 	//模块所属子系统
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="subSystemId")
-	private SubSystem subSystem;
+	@Column
+	private Long subSystemId;
 	
 }
