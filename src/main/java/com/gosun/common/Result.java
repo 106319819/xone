@@ -35,13 +35,13 @@ public class Result<T>
 		private Integer page; //当前页号，从1开始
 		private Integer size;//每页行数
 		private Integer pages;//总页数
-		private Long rows;//总记录数
+		private Integer rows;//总记录数
 		private List<T> content; //当前页的数据列表
 		public PageResult(Integer page,Integer size,Integer pages,Long rows,List<T> list){
 			this.page = page;
 			this.size = size;
 			this.pages = pages;
-			this.rows = rows;
+			this.rows = rows.intValue();
 			this.content = list;
 		}
 		
@@ -74,11 +74,11 @@ public class Result<T>
 			this.pages = pages;
 		}
 
-		public Long getRows() {
+		public Integer getRows() {
 			return rows;
 		}
 
-		public void setRows(Long rows) {
+		public void setRows(Integer rows) {
 			this.rows = rows;
 		}
 
