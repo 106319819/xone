@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -30,7 +31,8 @@ import lombok.EqualsAndHashCode;
 @DynamicUpdate
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-@Table(name="RoleModule")
+@Table(name="RoleModule"
+	,uniqueConstraints = {@UniqueConstraint(name="ROLE_MODULE_INDEX",columnNames= {"roleId","moduleId"})})
 public class RoleModule extends BaseEntity{
 
 
