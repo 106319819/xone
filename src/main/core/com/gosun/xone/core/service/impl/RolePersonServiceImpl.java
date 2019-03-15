@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.gosun.common.XoneException;
 import com.gosun.common.Error;
+import com.gosun.xone.core.entity.Module;
 import com.gosun.xone.core.entity.Person;
 import com.gosun.xone.core.entity.Role;
 import com.gosun.xone.core.entity.RolePerson;
@@ -26,9 +27,9 @@ public class RolePersonServiceImpl implements RolePersonService
 	@Autowired
 	private RolePersonRespository rolePersonRespository;
 	@Transactional
-	public void create(Long roleId,List<RolePerson> list)
+	public void create(Long personId,List<RolePerson> list)
 	{
-		this.rolePersonRespository.deleteAllByRoleId(roleId);
+		this.rolePersonRespository.deleteAllByPersonId(personId);
 		Iterator<RolePerson> it = list.iterator();
 		while(it.hasNext()) {
 			RolePerson tmp = it.next();
@@ -91,6 +92,12 @@ public class RolePersonServiceImpl implements RolePersonService
 	public void deleteByRoleId(Long roleId) {
 		// TODO Auto-generated method stub
 		this.rolePersonRespository.deleteAllByRoleId(roleId);
+	}
+
+	@Override
+	public List<Module> findModulesByPersonId(Long personId) {
+		// TODO Auto-generated method stub
+		return rolePersonRespository.findModulesByPersonId(personId);
 	}
 
 	

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.gosun.common.XoneException;
+import com.gosun.xone.core.entity.Module;
 import com.gosun.xone.core.entity.Person;
 import com.gosun.xone.core.entity.Role;
 import com.gosun.xone.core.entity.RolePerson;
@@ -26,5 +27,6 @@ public interface RolePersonService
 	public List<Person> findPersonsByRoleId(Long roleId);
 	public List<Role> findRolesByPersonId(Long personId);
 	
+	public List<Module> findModulesByPersonId(Long personId);
 	
 }

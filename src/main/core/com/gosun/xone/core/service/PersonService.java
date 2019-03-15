@@ -18,6 +18,7 @@ public interface PersonService
 	public List<Organization> findOrganizationsById(Long personId);
 	public Page<Person> findAll(Pageable pageable);
 	public void deleteById(Long personId);
+	public Person findByAccountId(Long accountId);
 	
 	public void deleteByIdList(List<Long> personIds);
 	public void update(Person person) throws XoneException;

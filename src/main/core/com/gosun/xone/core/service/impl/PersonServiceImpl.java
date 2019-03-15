@@ -87,6 +87,12 @@ public class PersonServiceImpl implements PersonService
 		// TODO Auto-generated method stub
 		this.personRespository.deleteByIdList(personIds);
 	}
+
+	@Override
+	public Person findByAccountId(Long accountId) {
+		// TODO Auto-generated method stub
+		return personRespository.findByAccountId(accountId);
+	}
 	
 	
 

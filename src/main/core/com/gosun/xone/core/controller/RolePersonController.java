@@ -26,9 +26,9 @@ public class RolePersonController {
 
 	@Autowired
 	private RolePersonService rolePersonService;
-	@RequestMapping("/create/{roleId}")
-	public Result<?> create(@PathVariable("roleId") Long roleId,@RequestBody List<RolePerson> list){
-		rolePersonService.create(roleId,list);
+	@RequestMapping("/create/{personId}")
+	public Result<?> create(@PathVariable("personId") Long personId,@RequestBody List<RolePerson> list){
+		rolePersonService.create(personId,list);
 		return Result.success(list);
 	}
 	@RequestMapping("/find-all")

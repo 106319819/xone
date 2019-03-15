@@ -23,4 +23,7 @@ public interface PersonRespository extends JpaRepository<Person, Long>
 	@Modifying
 	@Query("delete from Person t1 where t1.personId in :personIds")
 	public void deleteByIdList(List<Long> personIds);
+	
+	@Query("select t1 from Person t1 where t1.accountId = :accountId")
+	public Person findByAccountId(Long accountId);
 }
