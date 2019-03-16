@@ -80,11 +80,11 @@ public class DefaultUidGenerator implements UidGenerator, InitializingBean {
 	 */
      
     /** Bits allocate */
-    @Value(value="${com.gosun.uid.timeBits}")
+    @Value(value="${com.gosun.uid.time-bits}")
     protected int timeBits = 28;
-    @Value(value="${com.gosun.uid.workerBits}")
+    @Value(value="${com.gosun.uid.worker-bits}")
     protected int workerBits = 22;
-    @Value(value="${com.gosun.uid.seqBits}")
+    @Value(value="${com.gosun.uid.seq-bits}")
     protected int seqBits = 13;
 
     /** Customer epoch, unit as second. For example 2016-05-20 (ms: 1463673600000)*/

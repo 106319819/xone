@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.gosun.common.Util;
 import com.gosun.xone.core.entity.Account;
 import com.gosun.xone.core.repository.AccountRespository;
 import com.gosun.xone.core.service.AccountService;
@@ -16,6 +17,8 @@ public class AccountServiceImpl implements AccountService
 	private AccountRespository accountRespository;
 	public void create(Account account)
 	{
+		String password = Util.MD5(account.getPassword());
+		account.setPassword(password);
 		accountRespository.save(account);
 	}
 

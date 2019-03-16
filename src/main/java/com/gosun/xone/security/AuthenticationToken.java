@@ -9,22 +9,22 @@ import org.springframework.security.core.GrantedAuthority;
  * 自定义令牌对象
  * @date Nov 21, 2018
  */
-public class JwtAuthenticatioToken extends UsernamePasswordAuthenticationToken {
+public class AuthenticationToken extends UsernamePasswordAuthenticationToken {
 
 	private static final long serialVersionUID = 1L;
 	
 	private String token;
 
-    public JwtAuthenticatioToken(Object principal, Object credentials){
+    public AuthenticationToken(Object principal, Object credentials){
         super(principal, credentials);
     }
     
-    public JwtAuthenticatioToken(Object principal, Object credentials, String token){
+    public AuthenticationToken(Object principal, Object credentials, String token){
     	super(principal, credentials);
     	this.token = token;
     }
 
-    public JwtAuthenticatioToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities, String token) {
+    public AuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities, String token) {
     	super(principal, credentials, authorities);
     	this.token = token;
     }

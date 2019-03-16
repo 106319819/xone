@@ -18,6 +18,7 @@ import com.gosun.xone.core.entity.PersonRelations;
 import com.gosun.xone.core.repository.AccountRespository;
 import com.gosun.xone.core.repository.PersonRelationsRespository;
 import com.gosun.xone.core.repository.PersonRespository;
+import com.gosun.xone.core.service.AccountService;
 import com.gosun.xone.core.service.PersonService;
 @Service
 public class PersonServiceImpl implements PersonService
@@ -26,13 +27,13 @@ public class PersonServiceImpl implements PersonService
 	@Autowired
 	private PersonRespository personRespository;
 	@Autowired
-	private AccountRespository accountRespository;
+	private AccountService accountService;
 	@Autowired
 	private PersonRelationsRespository personRelationsRespository;
 	public void create(Person person)
 	{
 		//创建账号信息
-		this.accountRespository.save(person.getAccount());
+		this.accountService.create(person.getAccount());
 		//创建人员基本信息
 		this.personRespository.save(person);
 		//创建人员关系信息

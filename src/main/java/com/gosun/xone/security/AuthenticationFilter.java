@@ -11,23 +11,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.louis.kitty.admin.util.SecurityUtils;
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * 登录认证过滤器
  * @date Nov 20, 2018
  */
-public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
+@Slf4j
+public class AuthenticationFilter extends BasicAuthenticationFilter {
 
 	
 	@Autowired
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public AuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
     	// 获取token, 并检查登录状态
+    	log.debug(request.getRequestURI());
         SecurityUtils.checkAuthentication(request);
         chain.doFilter(request, response);
     }

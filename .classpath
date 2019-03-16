@@ -6,6 +6,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="src" path="src/main/core"/>
 	<classpathentry kind="src" path="src/main/uid"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
@@ -17,12 +18,6 @@
 		<attributes>
 			<attribute name="test" value="true"/>
 			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
-		<attributes>
-			<attribute name="test" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
