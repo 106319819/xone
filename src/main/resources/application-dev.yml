@@ -75,12 +75,13 @@ com:
       seq-bits: 9
       generator: xoneIdentityGenerator
 
+
 #允许跨域访问的url定义 ，多个URL之间以,号分隔
 service: 
   cros:
     registry:
     #注意：此处的MAPING在后台会删除字串中的前后空格
-      mapping: "/api/**,/sec/**"
+      mapping: "/admin/**,/sec/**"
       origins: "*"  #定义来源域名
       headers: "*"  
       methods: "*"
@@ -88,3 +89,6 @@ service:
       maxage: 3600
       exposed:
         headers: Authorization
+  #定义资源访问权限，放行URL
+  sercurity:
+    permit-all: /,/admin/login/

@@ -19,7 +19,7 @@ import com.gosun.xone.core.entity.Person;
 import com.gosun.xone.core.service.PersonService;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/admin/person")
 public class PersonController {
 
 	@Autowired

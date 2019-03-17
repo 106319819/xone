@@ -21,7 +21,7 @@ import com.gosun.xone.core.entity.RoleModule;
 import com.gosun.xone.core.service.RoleModuleService;
 
 @RestController
-@RequestMapping("/role-module")
+@RequestMapping("/admin/role-module")
 public class RoleModuleController {
 
 	@Autowired

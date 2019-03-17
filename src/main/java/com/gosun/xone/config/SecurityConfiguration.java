@@ -1,7 +1,9 @@
 package com.gosun.xone.config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,6 +27,8 @@ import com.gosun.xone.security.AuthenticationProvider;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
+	@Value("${service.sercurity.permit-all}")
+	public String permitAll;
 	@Autowired
 	private UserDetailsService userDetailsService;
     @Override
@@ -44,13 +48,28 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().
-                authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login/").permitAll()
-              .antMatchers("/api/**").permitAll()
-                	// 其他所有请求需要身份认证
-                .anyRequest().authenticated();
+		String[] maps = permitAll.split(",");
+		for(String tmp : maps ) {
+			http.cors().and().csrf().disable()
+			.authorizeRequests()
+			.antMatchers(HttpMethod.POST).permitAll()
+			.antMatchers(HttpMethod.GET).permitAll()
+			.antMatchers(HttpMethod.DELETE).permitAll()
+			.antMatchers(HttpMethod.HEAD).permitAll()
+			.antMatchers(HttpMethod.OPTIONS).permitAll()
+			.antMatchers(HttpMethod.PUT).permitAll()
+			.antMatchers(HttpMethod.TRACE).permitAll()
+			.antMatchers(HttpMethod.PATCH).permitAll()
+			.antMatchers(tmp).permitAll()
+			.anyRequest().authenticated();
+		}
+//        http.cors().and().csrf().disable().
+//                authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/login/").permitAll()
+//              .antMatchers("/api/**").permitAll()
+//                	// 其他所有请求需要身份认证
+//                .anyRequest().authenticated();
 
 //        http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
      // token验证过滤器

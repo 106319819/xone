@@ -19,7 +19,7 @@ import com.gosun.xone.core.entity.SubSystem;
 import com.gosun.xone.core.service.SubSystemService;
 
 @RestController
-@RequestMapping("/sub-system")
+@RequestMapping("/admin/sub-system")
 public class SubSystemController {
 
 	@Autowired

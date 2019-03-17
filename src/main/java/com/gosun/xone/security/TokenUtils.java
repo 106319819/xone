@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import com.gosun.common.Util;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -55,7 +57,7 @@ public class TokenUtils implements Serializable {
 	    Map<String, Object> claims = new HashMap<>(3);
 	    claims.put(USERNAME, SecurityUtils.getUsername(authentication));
 	    claims.put(CREATED, new Date());
-	    claims.put(AUTHORITIES, authentication.getAuthorities());
+//	    claims.put(AUTHORITIES, authentication.getAuthorities());
 	    return generateToken(claims);
 	}
 
@@ -93,40 +95,40 @@ public class TokenUtils implements Serializable {
 	 * @return 用户名
 	 */
 	public static Authentication getAuthenticationeFromToken(HttpServletRequest request) {
-		Authentication authentication = null;
+		Authentication authentication = SecurityUtils.getAuthentication() ;		
 		// 获取请求携带的令牌
 		String token = TokenUtils.getToken(request);
-		if(token != null) {
-			// 请求令牌不能为空
-			if(SecurityUtils.getAuthentication() == null) {
-				// 上下文中Authentication为空
-				Claims claims = getClaimsFromToken(token);
-				if(claims == null) {
-					return null;
-				}
-				String username = claims.getSubject();
-				if(username == null) {
-					return null;
-				}
-				if(isTokenExpired(token)) {
-					return null;
-				}
-				Object authors = claims.get(AUTHORITIES);
-				List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-				if (authors != null && authors instanceof List) {
-					for (Object object : (List) authors) {
-//						authorities.add(new SimpleGrantedAuthority((String) ((Map) object).get("authority")));
-						authorities.add(new SimpleGrantedAuthority((String) ((Map) object).get("role")));
-					}
-				}
-				authentication = new AuthenticationToken(username, null, authorities, token);
-			} else {
-				if(validateToken(token, SecurityUtils.getUsername())) {
-					// 如果上下文中Authentication非空，且请求令牌合法，直接返回当前登录认证信息
-					authentication = SecurityUtils.getAuthentication();
-				}
+		if(Util.isNvl(token)) {
+			return authentication;
+		}
+		
+		if(!Util.isNvl(authentication)) {
+			if(validateToken(token, authentication.getName())) {
+				return authentication;
 			}
 		}
+		
+		// 上下文中Authentication为空
+		Claims claims = getClaimsFromToken(token);
+		if(claims == null) {
+			return null;
+		}
+		String username = claims.getSubject();
+		if(username == null) {
+			return null;
+		}
+		if(isTokenExpired(token)) {
+			return null;
+		}
+		Object authors = claims.get(AUTHORITIES);
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		if (authors != null && authors instanceof List) {
+			for (Object object : (List) authors) {
+//				authorities.add(new SimpleGrantedAuthority((String) ((Map) object).get("authority")));
+				authorities.add(new SimpleGrantedAuthority((String) ((Map) object).get("role")));
+			}
+		}
+		authentication = new AuthenticationToken(username, null, authorities, token);
 		return authentication;
 	}
 

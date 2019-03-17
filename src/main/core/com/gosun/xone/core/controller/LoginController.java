@@ -27,7 +27,7 @@ import com.gosun.xone.security.AuthenticationToken;
 import com.gosun.xone.security.SecurityUtils;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/admin/login")
 public class LoginController {
 
 	@Autowired

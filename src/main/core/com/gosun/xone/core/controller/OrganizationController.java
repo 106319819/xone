@@ -20,7 +20,7 @@ import com.gosun.xone.core.service.OrganizationService;
 
 
 @RestController
-@RequestMapping("/organization")
+@RequestMapping("/admin/organization")
 public class OrganizationController
 {
 

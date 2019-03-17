@@ -17,7 +17,7 @@ import com.gosun.xone.core.entity.Account;
 import com.gosun.xone.core.service.AccountService;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/admin/account")
 public class AccountController {
 
 	@Autowired

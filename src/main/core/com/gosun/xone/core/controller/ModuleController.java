@@ -19,7 +19,7 @@ import com.gosun.xone.core.entity.Module;
 import com.gosun.xone.core.service.ModuleService;
 
 @RestController
-@RequestMapping("/module")
+@RequestMapping("/admin/module")
 public class ModuleController {
 
 	@Autowired
