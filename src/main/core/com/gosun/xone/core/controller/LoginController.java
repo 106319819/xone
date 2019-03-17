@@ -39,10 +39,10 @@ public class LoginController {
 	
 	@RequestMapping("/")
 	public Result<?> login(@RequestBody Account loginAccount,HttpServletRequest request){
-		if("webmaster".equals(loginAccount.getAccountCode())){
-			//如果是管理员，暂时先不认证
-			return Result.success(loginAccount);
-		}
+//		if("webmaster".equals(loginAccount.getAccountCode())){
+//			//如果是管理员，暂时先不认证
+//			return Result.success(loginAccount);
+//		}
 		Account account = accountService.findByAccountCode(loginAccount.getAccountCode());
 		if(Util.isNvl(account)) {
 			return Result.error(XoneException.instance(Error.NO_FOUND_USER));
