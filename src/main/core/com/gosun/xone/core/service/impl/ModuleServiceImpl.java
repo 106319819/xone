@@ -114,4 +114,8 @@ public class ModuleServiceImpl implements ModuleService
 		children.sort((c1,c2) -> c1.getSortNo().compareTo(c2.getSortNo()));
 	}
 
+	public List<Module> fetchTreeByPersonId(Long personId){
+		List<Module> modules = this.moduleRespository.fetchTreeByPersonId(personId);
+		return buildTree(modules);
+	}
 }

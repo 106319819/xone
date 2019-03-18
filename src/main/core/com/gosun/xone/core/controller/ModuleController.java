@@ -71,4 +71,9 @@ public class ModuleController {
 		return Result.success(modules);
 	}
 	
+	@RequestMapping("/fetch-tree-by-person-id/{personId}")
+	public Result<?> fetchTreeByPersonId(@PathVariable("personId") Long personId) throws XoneException{
+		List<Module> modules = moduleService.fetchTreeByPersonId(personId);
+		return Result.success(modules);
+	}
 }

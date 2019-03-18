@@ -4,16 +4,16 @@ spring:
     url: jdbc:mysql://localhost:3306/xone?useSSL=false&allowPublicKeyRetrieval=true
     username: root
 #linux
-    password: Yao;9605001
+#    password: Yao;9605001
 #windows
-#    password: 9605001
+    password: 9605001
     driver-class-name: com.mysql.jdbc.Driver
 #create update
   jpa:
     properties:
       hibernate:
         hbm2ddl:
-          auto: create #update
+          auto: update #update create
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
 

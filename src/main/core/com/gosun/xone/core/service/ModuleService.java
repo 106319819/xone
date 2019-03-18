@@ -21,5 +21,7 @@ public interface ModuleService
 	public void update(Module module) throws XoneException;
 	
 	public List<Module> fetchTreeBySubSystemId(Long subSystemId); 
+	public List<Module> fetchTreeByPersonId(Long personId); 
+	
 	
 }
