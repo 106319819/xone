@@ -13,7 +13,7 @@ import com.gosun.xone.core.entity.RoleModule;
 
 public interface RoleModuleService
 {
-	public void create(Long roleId,List<RoleModule> list);
+	public void create(Long roleId,Long subSystemId,List<RoleModule> list);
 	public RoleModule findById(Long roleModuleId);
 	public Page<RoleModule> findAll(Pageable pageable);
 	public void deleteById(Long roleModuleId);

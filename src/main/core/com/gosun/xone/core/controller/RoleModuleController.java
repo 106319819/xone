@@ -26,9 +26,9 @@ public class RoleModuleController {
 
 	@Autowired
 	private RoleModuleService roleModuleService;
-	@RequestMapping("/create/{roleId}")
-	public Result<?> create(@PathVariable("roleId") Long roleId,@RequestBody List<RoleModule> list){
-		roleModuleService.create(roleId,list);
+	@RequestMapping("/create/{roleId}/{subSystemId}")
+	public Result<?> create(@PathVariable("roleId") Long roleId,@PathVariable("subSystemId")Long subSystemId,@RequestBody List<RoleModule> list){
+		roleModuleService.create(roleId,subSystemId,list);
 		return Result.success(list);
 	}
 	@RequestMapping("/find-all")

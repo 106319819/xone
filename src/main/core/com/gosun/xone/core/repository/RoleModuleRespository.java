@@ -25,6 +25,10 @@ public interface RoleModuleRespository extends JpaRepository<RoleModule, Long>
 	
 	public List<RoleModule> findAllByRoleId(Long roleId);
 	@Modifying
-	@Query("delete from  RoleModule t1 where t1.roleId in :roleId")
+	@Query("delete from  RoleModule t1 where t1.roleId = :roleId")
 	public void deleteAllByRoleId(Long roleId);
+	@Modifying
+	@Query("delete from  RoleModule t1 where t1.roleId = :roleId"
+			+ " and t1.moduleId in (select moduleId from Module where subSystemId = :subSystemId)")
+	public void deleteAll(Long roleId,Long subSystemId);
 }

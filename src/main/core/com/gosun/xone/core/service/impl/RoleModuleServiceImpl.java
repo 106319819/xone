@@ -26,9 +26,9 @@ public class RoleModuleServiceImpl implements RoleModuleService
 	@Autowired
 	private RoleModuleRespository roleModuleRespository;
 	@Transactional
-	public void create(Long roleId,List<RoleModule> list)
+	public void create(Long roleId,Long subSystemId,List<RoleModule> list)
 	{
-		this.roleModuleRespository.deleteAllByRoleId(roleId);
+		this.roleModuleRespository.deleteAll(roleId,subSystemId);
 		Iterator<RoleModule> it = list.iterator();
 		while(it.hasNext()) {
 			RoleModule tmp = it.next();
