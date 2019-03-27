@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +27,13 @@ import com.gosun.xone.core.service.AccountService;
 import com.gosun.xone.core.service.PersonService;
 import com.gosun.xone.security.AuthenticationToken;
 import com.gosun.xone.security.SecurityUtils;
+import com.gosun.xone.security.TokenUtils;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/admin/login")
+@RequestMapping("/")
+@Slf4j
 public class LoginController {
 
 	@Autowired
@@ -37,7 +43,7 @@ public class LoginController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	@RequestMapping("/")
+	@RequestMapping("admin/login")
 	public Result<?> login(@RequestBody Account loginAccount,HttpServletRequest request){
 //		if("webmaster".equals(loginAccount.getAccountCode())){
 //			//如果是管理员，暂时先不认证
@@ -58,6 +64,31 @@ public class LoginController {
 		Person person = personService.findByAccountId(account.getAccountId());
 		return Result.success(this.buildAuthentication(account.getAccountCode(),person.getPersonId(), token.getToken()) );
 		
+	}
+	/**
+	 * 登录校验
+	 * @param loginAccount
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("login-verify/")
+	public Result<?> loginVerify(HttpServletRequest request){
+		log.debug("session id: {}",request.getRequestedSessionId());
+				
+		Cookie[] cookies = request.getCookies();
+		if(!Util.isNvl(cookies)) {
+			for(Cookie cookie : cookies) {
+				log.debug("cookie - {} : {}",cookie.getName(),cookie.getValue());
+			}
+		}
+		
+		Authentication authentication = TokenUtils.getAuthenticationeFromToken(request);
+		if(Util.isNvl(authentication)) {
+			return Result.error(XoneException.instance(Error.NO_PRIVILEGE));
+		}
+		Account account = accountService.findByAccountCode(authentication.getName());
+		Person person = personService.findByAccountId(account.getAccountId());
+		return Result.success(this.buildAuthentication(account.getAccountCode(),person.getPersonId(), null) );
 	}
 	
 	@RequestMapping("/find-all")
@@ -84,7 +115,9 @@ public class LoginController {
 		Map<String, String> map = new HashMap<>();
 		map.put("accountCode", accountCode);
 		map.put("personId", String.valueOf(personId));
-		map.put("token", token);
+		if(!Util.isNvl(token)) {
+			map.put("token", token);
+		}
 		return map;
 	}
 }

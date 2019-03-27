@@ -91,4 +91,4 @@ service:
         headers: Authorization
   #定义资源访问权限，放行URL
   sercurity:
-    permit-all: /,/admin/login/
+    permit-all: /,/admin/login/,/login-verify/
