@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gosun.common.XoneException;
 import com.gosun.common.Result;
 import com.gosun.common.Util;
+import com.gosun.xone.core.entity.Organization;
 import com.gosun.xone.core.entity.Person;
 import com.gosun.xone.core.service.PersonService;
 
@@ -63,6 +64,11 @@ public class PersonController {
 	@RequestMapping("/find-by-organization/{organizationId}")
 	public Result<?> findByOrganization(@PathVariable("organizationId") Long organizationId){
 		List<Person> result = personService.findByOrganizationId(organizationId);
+		return Result.success(result);
+	}
+	@RequestMapping("/find-organizations/{personId}")
+	public Result<?> findOrganizationsByPersonId(@PathVariable("personId") Long personId){
+		List<Organization> result = personService.findOrganizationsById(personId);
 		return Result.success(result);
 	}
 	@PostMapping("/update")
