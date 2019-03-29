@@ -118,4 +118,12 @@ public class ModuleServiceImpl implements ModuleService
 		List<Module> modules = this.moduleRespository.fetchTreeByPersonId(personId);
 		return buildTree(modules);
 	}
+
+	@Override
+	public List<Module> fetchTree(Long personId, Long subSystemId) {
+		List<Module> modules = this.moduleRespository.fetchTree(personId,subSystemId);
+		return buildTree(modules);
+	}
+	
+	
 }

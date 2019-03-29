@@ -60,6 +60,13 @@ public class SubSystemController {
 		List<SubSystem> result = subSystemService.findByOrganizationId(organizationId);
 		return Result.success(result);
 	}
+	
+	@RequestMapping("/find-by-person-id/{personId}")
+	public Result<?> findByPersonId(@PathVariable("personId") Long personId){
+		List<SubSystem> result = subSystemService.findByPersonId(personId);
+		return Result.success(result);
+	}
+	
 	@PostMapping("/update")
 	public Result<?> update(@RequestBody SubSystem subSystem) throws XoneException{
 		subSystemService.update(subSystem);

@@ -2,6 +2,7 @@ package com.gosun.xone.core.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -23,8 +24,10 @@ import com.gosun.common.Result;
 import com.gosun.common.Util;
 import com.gosun.xone.core.entity.Account;
 import com.gosun.xone.core.entity.Person;
+import com.gosun.xone.core.entity.SubSystem;
 import com.gosun.xone.core.service.AccountService;
 import com.gosun.xone.core.service.PersonService;
+import com.gosun.xone.core.service.SubSystemService;
 import com.gosun.xone.security.AuthenticationToken;
 import com.gosun.xone.security.SecurityUtils;
 import com.gosun.xone.security.TokenUtils;
@@ -40,6 +43,8 @@ public class LoginController {
 	private AccountService accountService;
 	@Autowired
 	private PersonService personService;
+	@Autowired
+	private SubSystemService subSystemService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
@@ -62,7 +67,7 @@ public class LoginController {
 		
 		AuthenticationToken token = SecurityUtils.login(request,account.getAccountCode(), password, authenticationManager);
 		Person person = personService.findByAccountId(account.getAccountId());
-		return Result.success(this.buildAuthentication(account.getAccountCode(),person.getPersonId(), token.getToken()) );
+		return Result.success(this.buildAuthentication(account,person, token.getToken()) );
 		
 	}
 	/**
@@ -88,7 +93,7 @@ public class LoginController {
 		}
 		Account account = accountService.findByAccountCode(authentication.getName());
 		Person person = personService.findByAccountId(account.getAccountId());
-		return Result.success(this.buildAuthentication(account.getAccountCode(),person.getPersonId(), null) );
+		return Result.success(this.buildAuthentication(account,person, null) );
 	}
 	
 	@RequestMapping("/find-all")
@@ -111,13 +116,17 @@ public class LoginController {
 		
 	}
 	
-	protected Map<String, String> buildAuthentication(String accountCode,Long personId,String token){
-		Map<String, String> map = new HashMap<>();
-		map.put("accountCode", accountCode);
-		map.put("personId", String.valueOf(personId));
+	protected Map<String, Object> buildAuthentication(Account account,Person person,String token){
+		Map<String, Object> map = new HashMap<>();
+		map.put("accountCode", account.getAccountCode());
+		map.put("personId", String.valueOf(person.getPersonId()));
+		map.put("fullName", person.getFullName());
 		if(!Util.isNvl(token)) {
 			map.put("token", token);
 		}
+		
+		List<SubSystem> subSystems = subSystemService.findByPersonId(person.getPersonId());
+		map.put("subSystems", subSystems);
 		return map;
 	}
 }

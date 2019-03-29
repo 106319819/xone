@@ -14,6 +14,8 @@ public interface SubSystemService
 {
 	public void create(SubSystem subSystem);
 	public List<SubSystem> findByOrganizationId(Long organizationId);
+	public List<SubSystem> findByPersonId(Long personId);
+	
 	public SubSystem findById(Long subSystemId);
 	public List<Organization> findOrganizationsById(Long subSystemId);
 	public Page<SubSystem> findAll(Pageable pageable);

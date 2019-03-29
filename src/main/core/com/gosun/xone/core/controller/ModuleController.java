@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gosun.common.XoneException;
@@ -74,6 +75,12 @@ public class ModuleController {
 	@RequestMapping("/fetch-tree-by-person-id/{personId}")
 	public Result<?> fetchTreeByPersonId(@PathVariable("personId") Long personId) throws XoneException{
 		List<Module> modules = moduleService.fetchTreeByPersonId(personId);
+		return Result.success(modules);
+	}
+	
+	@RequestMapping("/fetch-tree")
+	public Result<?> fetchTree(@RequestParam Long personId,@RequestParam Long subSystemId) throws XoneException{
+		List<Module> modules = moduleService.fetchTree(personId, subSystemId);
 		return Result.success(modules);
 	}
 }

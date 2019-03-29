@@ -22,6 +22,6 @@ public interface ModuleService
 	
 	public List<Module> fetchTreeBySubSystemId(Long subSystemId); 
 	public List<Module> fetchTreeByPersonId(Long personId); 
-	
+	public List<Module> fetchTree(Long personId,Long subSystemId); 
 	
 }

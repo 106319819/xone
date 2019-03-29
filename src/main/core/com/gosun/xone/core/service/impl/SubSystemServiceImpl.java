@@ -42,6 +42,12 @@ public class SubSystemServiceImpl implements SubSystemService
 		return subSystemRespository.findSubSystemsByOrganizationId(organizationId);
 	}
 
+	@Override
+	public List<SubSystem> findByPersonId(Long personId) {
+		// TODO Auto-generated method stub
+		return subSystemRespository.findByPersonId(personId);
+	}
+
 	public SubSystem findById(Long subSystemId)
 	{
 		// TODO Auto-generated method stub
