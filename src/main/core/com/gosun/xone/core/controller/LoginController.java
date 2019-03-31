@@ -118,6 +118,7 @@ public class LoginController {
 	
 	protected Map<String, Object> buildAuthentication(Account account,Person person,String token){
 		Map<String, Object> map = new HashMap<>();
+		map.put("accountId", account.getAccountId());
 		map.put("accountCode", account.getAccountCode());
 		map.put("personId", String.valueOf(person.getPersonId()));
 		map.put("fullName", person.getFullName());

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gosun.common.XoneException;
@@ -24,9 +25,24 @@ public class AccountController {
 	private AccountService accountService;
 	
 	@RequestMapping("/create")
-	public Result<?> create(@RequestBody Account Account){
-		accountService.create(Account);
-		return Result.success(Account);
+	public Result<?> create(@RequestBody Account account){
+		accountService.create(account);
+		return Result.success(account);
+	}
+	@RequestMapping("/update-account-code/{accountId}")
+	public Result<?> create(@PathVariable("accountId") Long accountId,@RequestParam String accountCode){
+		accountService.updateAccountCode(accountId,accountCode);
+		return Result.success(accountId);
+	}
+	@RequestMapping("/update-account-password/{accountId}")
+	public Result<?> create(@PathVariable("accountId") Long accountId,@RequestParam String srcpwd,@RequestParam String password) throws XoneException{
+		accountService.updatePassword(accountId, srcpwd, password);
+		return Result.success(accountId);
+	}
+	@RequestMapping("/reset-account-password")
+	public Result<?> resetPassword(@RequestBody Account account) throws XoneException{
+		Account result = accountService.resetPassword(account);
+		return Result.success(result);
 	}
 	@RequestMapping("/find-all")
 	public Result<?> findAll(@RequestBody String content) throws IOException, XoneException{
