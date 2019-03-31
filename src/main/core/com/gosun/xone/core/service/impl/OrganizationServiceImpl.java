@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +19,6 @@ import com.gosun.xone.core.service.OrganizationService;
 public class OrganizationServiceImpl  implements OrganizationService
 {
 	private static final String CODE_FORMAT = "%04d";
-	private static Logger logger = LoggerFactory.getLogger(OrganizationServiceImpl.class);
 	@Autowired
 	private OrganizationRespository organizationRespository;
 

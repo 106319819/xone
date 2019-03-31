@@ -27,7 +27,6 @@ import com.gosun.uid.utils.NetUtils;
 import com.gosun.uid.worker.dao.WorkerNodeDAO;
 import com.gosun.uid.worker.entity.WorkerNodeEntity;
 
-import javax.annotation.Resource;
 
 /**
  * Represents an implementation of {@link WorkerIdAssigner}, 

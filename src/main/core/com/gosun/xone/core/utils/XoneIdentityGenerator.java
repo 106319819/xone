@@ -10,6 +10,7 @@ import com.gosun.common.SpringContextUtil;
 import com.gosun.uid.impl.CachedUidGenerator;
 @Component
 public class XoneIdentityGenerator extends IdentityGenerator {
+	@SuppressWarnings("unused")
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object object) {
 		// TODO Auto-generated method stub

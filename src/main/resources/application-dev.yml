@@ -16,7 +16,13 @@ spring:
           auto: update  #update create
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
-
+#会话管理
+  session:
+    store-type: jdbc
+    jdbc: 
+#      initialize-schema: always  # Database schema initialization mode. embedded
+      schema: classpath:org/springframework/session/jdbc/schema-mysql.sql # Path to the SQL file to use to initialize the database schema.
+      
 #thymelea模板配置 这是不必要填的 填在配置文件里面默认覆盖
 #  thymeleaf:
 #    cache: false
@@ -92,3 +98,4 @@ service:
   #定义资源访问权限，放行URL
   sercurity:
     permit-all: /,/admin/login/,/login-verify/
+    

@@ -12,11 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.gosun.common.XoneException;
 import com.gosun.common.Error;
-import com.gosun.xone.core.entity.Account;
 import com.gosun.xone.core.entity.Organization;
 import com.gosun.xone.core.entity.Person;
 import com.gosun.xone.core.entity.PersonRelations;
-import com.gosun.xone.core.repository.AccountRespository;
 import com.gosun.xone.core.repository.PersonRelationsRespository;
 import com.gosun.xone.core.repository.PersonRespository;
 import com.gosun.xone.core.service.AccountService;
