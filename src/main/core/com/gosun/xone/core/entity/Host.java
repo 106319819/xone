@@ -20,7 +20,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 模块（菜单）信息表
+ * 主机变量
  * @version 1.0
  * @date 2018年8月26日 下午3:12:17
  * @history
@@ -31,59 +31,25 @@ import lombok.EqualsAndHashCode;
 @DynamicUpdate
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-@Table(name="module")
-public class Module extends BaseEntity{
+@Table(name="host")
+public class Host extends BaseEntity{
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
 	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
-	private Long moduleId;
+	private Long hostId;
 	
 	//名称
 	@Column(nullable=false,length=64)
 	private String name;
-	//上级模块id
-	@Column
-	private Long parentId;
+	//变量名
+	@Column(nullable=false)
+	private String variable;
 
-	//菜单URL
-	@Column(length=256)
+	//URL
+	@Column(nullable=false)
     private String url;
 
-	//权限标识
-	@Column(length=128)
-    private String permission;
-
-	//模块类型 0 分类 1菜单 2操作
-	@Column(nullable=false)
-    private Integer type;
-
-	//图标资源
-	@Column(length=64)
-    private String icon;
-
-	//排序码
-	@Column
-    private Integer sortNo = 0;
-
-	//状态 0未激活 1激活 2禁用 3删除
-	@Column(nullable=false)
-	private Integer status=1;
-	
-    // 非数据库字段
-	@Transient
-    private String parentName;
-    // 非数据库字段
-	@Transient
-    private Integer level;
-    // 非数据库字段
-	@Transient
-    private List<Module> children;
-	
-	
-	//模块所属子系统
-	@Column
-	private Long subSystemId;
 	
 }

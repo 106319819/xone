@@ -1,6 +1,7 @@
 package com.gosun.xone.core.service.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 import com.gosun.common.XoneException;
 import com.gosun.common.Error;
 import com.gosun.common.Util;
+import com.gosun.xone.core.entity.Host;
 import com.gosun.xone.core.entity.Module;
+import com.gosun.xone.core.repository.HostRespository;
 import com.gosun.xone.core.repository.ModuleRespository;
 import com.gosun.xone.core.service.ModuleService;
 
@@ -22,6 +25,8 @@ import com.gosun.xone.core.service.ModuleService;
 public class ModuleServiceImpl implements ModuleService
 {
 
+	@Autowired
+	private HostRespository hostRespository;
 	@Autowired
 	private ModuleRespository moduleRespository;
 	public void create(Module module)
@@ -76,6 +81,7 @@ public class ModuleServiceImpl implements ModuleService
 	}
 	
 	protected List<Module> buildTree(List<Module> modules){
+		
 		List<Module> parents = new ArrayList<>();
 		for(Module item: modules) {
 			if(parents.contains(item)) {
@@ -116,14 +122,46 @@ public class ModuleServiceImpl implements ModuleService
 
 	public List<Module> fetchTreeByPersonId(Long personId){
 		List<Module> modules = this.moduleRespository.fetchTreeByPersonId(personId);
+		// 先处理模块中的主机变量
+		processHostVariable(modules);
+		// 再处理树型结构
 		return buildTree(modules);
 	}
 
 	@Override
 	public List<Module> fetchTree(Long personId, Long subSystemId) {
 		List<Module> modules = this.moduleRespository.fetchTree(personId,subSystemId);
+		// 先处理模块中的主机变量
+		processHostVariable(modules);
+		// 再处理树型结构
 		return buildTree(modules);
 	}
 	
-	
+	protected void processHostVariable(List<Module> modules) {
+		List<Host> hosts = hostRespository.findAll();
+		Iterator<Host> it = hosts.iterator();
+		while(it.hasNext()) {
+			Host host = it.next();
+			String var = host.getVariable();
+			if(Util.isNvl(var)) {
+				continue;
+			}
+			
+			String regExp = "\\$\\{" + var + "\\}"; //"\\${" + field + "}";						 
+			Iterator<Module> mit = modules.iterator();
+			while(mit.hasNext()) {
+				Module module = mit.next();
+				String url = module.getUrl();
+				if(Util.isNvl(url)) {
+					continue;
+				}
+				
+				if(url.contains(var)) {
+					String tmp = url.replaceAll(regExp, host.getUrl());
+					module.setUrl(tmp);
+				}
+			}
+			
+		}
+	}
 }
