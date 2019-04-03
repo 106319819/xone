@@ -22,7 +22,7 @@ spring:
     jdbc: 
 #      initialize-schema: always  # Database schema initialization mode. embedded
       schema: classpath:org/springframework/session/jdbc/schema-mysql.sql # Path to the SQL file to use to initialize the database schema.
-      
+      table-name: "sessions"
 #thymelea模板配置 这是不必要填的 填在配置文件里面默认覆盖
 #  thymeleaf:
 #    cache: false

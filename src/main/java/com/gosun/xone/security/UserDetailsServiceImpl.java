@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.gosun.common.Util;
 import com.gosun.xone.core.entity.Account;
 import com.gosun.xone.core.entity.Module;
@@ -35,18 +36,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private AccountService accountService;
     @Autowired
     private RolePersonService rolePersonService;
-    @Autowired
-    private PersonService personService;
     @Override
-    public UserDetails loadUserByUsername(String accountCode) throws UsernameNotFoundException {
-        Account account = this.accountService.findByAccountCode(accountCode);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    	JsonNode node = Util.parseJSONEx(username);
+        Account account = this.accountService.findByAccountCode(node.get("accountCode").asText());
         if(Util.isNvl(account)) {
             throw new UsernameNotFoundException("该用户不存在");
         }
         // 用户权限列表，根据用户拥有的权限标识与如 @PreAuthorize("hasAuthority('sys:menu:view')") 标注的接口对比，决定是否可以调用接口
-        
-        Person person = personService.findByAccountId(account.getAccountId());        
-        List<Module> modules = rolePersonService.findModulesByPersonId(person.getPersonId());
+        Long personId = node.get("personId").asLong();
+//        Person person = personService.findByAccountId(account.getAccountId());        
+        List<Module> modules = rolePersonService.findModulesByPersonId(personId);
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         Iterator<Module> it = modules.iterator();
         while(it.hasNext()) {
@@ -56,6 +56,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         	SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permission);
         	authorities.add(authority);
         }
-         return new User(accountCode, account.getPassword(),  authorities);
+         return new User(username, account.getPassword(),  authorities);
     }
 }

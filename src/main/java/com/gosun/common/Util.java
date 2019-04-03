@@ -2410,13 +2410,31 @@ public class Util
 		}
 		return null;
 	}
-	
+	public static JsonNode parseJSONEx(String json) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.readTree(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public static <T> String buildJSON(T value) throws XoneException {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			return mapper.writeValueAsString(value);
 		} catch (JsonProcessingException e) {
 			XoneException.throwing(Error.PARAM_JSON,e);
+		}
+		return null;
+	}
+	
+	public static <T> String buildJSONEx(T value) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(value);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

@@ -25,6 +25,7 @@ public class SecurityUtils {
 	 */
 	public static AuthenticationToken login(HttpServletRequest request, String username, String password, AuthenticationManager authenticationManager) {
 		AuthenticationToken token = new AuthenticationToken(username, password);
+			
 		token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 		// 执行登录认证过程
 	    Authentication authentication = authenticationManager.authenticate(token);

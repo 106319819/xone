@@ -14,7 +14,7 @@ public class AuthenticationToken extends UsernamePasswordAuthenticationToken {
 	private static final long serialVersionUID = 1L;
 	
 	private String token;
-
+	
     public AuthenticationToken(Object principal, Object credentials){
         super(principal, credentials);
     }
@@ -36,6 +36,7 @@ public class AuthenticationToken extends UsernamePasswordAuthenticationToken {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
