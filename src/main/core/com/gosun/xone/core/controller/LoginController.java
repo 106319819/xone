@@ -94,7 +94,7 @@ public class LoginController {
 		if(Util.isNvl(authentication)) {
 			return Result.error(XoneException.instance(Error.NO_PRIVILEGE));
 		}
-		String username = authentication.getName();
+		String username = TokenUtils.getUsername(authentication);
 		JsonNode node = Util.parseJSONEx(username);
 		String accountCode = node.get("accountCode").asText();
 		Long accountId = node.get("accountId").asLong();

@@ -29,6 +29,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
 	@Value("${service.sercurity.permit-all}")
 	public String permitAll;
+	
 	@Autowired
 	private UserDetailsService userDetailsService;
     @Override

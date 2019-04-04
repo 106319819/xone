@@ -98,4 +98,6 @@ service:
   #定义资源访问权限，放行URL
   sercurity:
     permit-all: /,/admin/login/,/login-verify/
+    token-password: pay;pwd #jwt token的加解密码
+    name-password: allinpay;pwd #定义jwt中sub的加解密码，其实也就是username串的加解密码
     
