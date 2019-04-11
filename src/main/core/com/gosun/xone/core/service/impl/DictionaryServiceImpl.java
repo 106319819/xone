@@ -28,6 +28,10 @@ public class DictionaryServiceImpl implements DictionaryService
 		return dictionaryRespository.findAll(pageable);
 	}
 
+	public List<Dictionary> findAll() {
+		// TODO Auto-generated method stub
+		return dictionaryRespository.findAll();
+	}
 	@Override
 	public void deleteAll(Long typeId) {
 		// TODO Auto-generated method stub

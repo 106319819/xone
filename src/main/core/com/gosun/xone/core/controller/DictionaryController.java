@@ -36,8 +36,13 @@ public class DictionaryController {
 		Page<Dictionary> result = dictionaryService.findAll(pageable);
 		return Result.success(result, result.getContent());
 	}
-	@RequestMapping("/find-list/{typeId}")
-	public Result<?> findList(@PathVariable("typeId") Long typeId) throws IOException, XoneException{
+	@RequestMapping("/find-all-list")
+	public Result<?> findAllList(@RequestBody String content) throws IOException, XoneException{
+		List<Dictionary> result = dictionaryService.findAll();
+		return Result.success(result);
+	}
+	@RequestMapping("/find-list-by/{typeId}")
+	public Result<?> findListBy(@PathVariable("typeId") Long typeId) throws IOException, XoneException{
 		List<Dictionary> result = dictionaryService.findAllByTypeId(typeId);
 		return Result.success(result);
 	}

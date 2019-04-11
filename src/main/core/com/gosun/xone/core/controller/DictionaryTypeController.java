@@ -36,6 +36,7 @@ public class DictionaryTypeController {
 		Page<DictionaryType> result = dictionaryTypeService.findAll(pageable);
 		return Result.success(result, result.getContent());
 	}
+
 	@RequestMapping("/find-list")
 	public Result<?> findList() throws IOException, XoneException{
 		List<DictionaryType> result = dictionaryTypeService.findAll();

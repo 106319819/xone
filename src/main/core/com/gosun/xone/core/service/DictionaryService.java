@@ -19,6 +19,7 @@ public interface DictionaryService
 	
 	public void update(Dictionary dictionary);
 	public Page<Dictionary> findAll(Pageable pageable);
+	public List<Dictionary> findAll();
 	public List<Dictionary> findAllByTypeId(Long typeId);
 	public Dictionary findByTypeIdAndCode(Long typeId,String code);
 	public Dictionary findById(Long dictionaryId);
