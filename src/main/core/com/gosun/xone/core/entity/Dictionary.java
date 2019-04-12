@@ -46,8 +46,8 @@ public class Dictionary extends BaseEntity{
 	@Column(nullable=false)
 	private String value;
 	
-	@Column(nullable=false)
-	private String name;
+//	@Column(nullable=false)
+//	private String name;
 	
 	@Column
 	private Integer sortNo;
