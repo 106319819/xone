@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -33,20 +32,32 @@ public class Account extends BaseEntity{
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.TABLE, generator = "xoneIdentityGenerator") 
+//	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long accountId;
-	
-	@Column(nullable=false,length=64, unique = true, columnDefinition="varchar(64) comment '登录账号'")
+	/**
+	 * 登录账号
+	 */
+	@Column(nullable=false,length=64, unique = true)
 	private String accountCode;
-	
-	@Column(nullable=false,length=256, columnDefinition="varchar(64) comment '密码'")
+	/**
+	 * 密码
+	 */
+	@Column(nullable=false,length=256)
 	private String password;
 
-	@Column(nullable=false,columnDefinition="int(2) comment '账号状态 0未激活 1激活 2禁用 3删除'")
+	/**
+	 * 账号状态 0未激活 1激活 2禁用 3删除
+	 */
+	@Column(nullable=false)
 	private Integer status = 1;
 
-	@Column(nullable=false,columnDefinition="char(1) comment '账号类型 9超级管理员  8子系统管理员 0一般账号 ' ")
+	/**
+	 * 账号类型 9超级管理员  8子系统管理员 0一般账号
+	 */
+	@Column(nullable=false,length=1)
 	private String accountType="0";
 
 

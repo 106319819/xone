@@ -9,12 +9,14 @@ import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.gosun.common.Util;
 import com.gosun.xone.security.AuthenticationFilter;
 import com.gosun.xone.security.AuthenticationProvider;
 
@@ -49,8 +51,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-		String[] maps = permitAll.split(",");
-		for(String tmp : maps ) {
+		
 			http.cors().and().csrf().disable()
 			.authorizeRequests()
 			.antMatchers(HttpMethod.POST).permitAll()
@@ -61,9 +62,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.PUT).permitAll()
 			.antMatchers(HttpMethod.TRACE).permitAll()
 			.antMatchers(HttpMethod.PATCH).permitAll()
-			.antMatchers(tmp).permitAll()
 			.anyRequest().authenticated();
-		}
 //        http.cors().and().csrf().disable().
 //                authorizeRequests()
 //                .antMatchers("/").permitAll()
@@ -76,4 +75,15 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
      // token验证过滤器
         http.addFilterBefore(new AuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);
     }
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// TODO Auto-generated method stub
+		super.configure(web);
+		if(!Util.isNvl(permitAll)) {
+			String[] maps = permitAll.split(",");
+			web.ignoring().antMatchers(maps);
+		}
+	}
+	
+	
 }

@@ -25,24 +25,42 @@ import lombok.Data;
 @Table(name="RegionNationality")
 public class Nationality{
 
+	/**
+	 * 国家代码 ISO标准
+	 */
 	@Id
-	@Column(columnDefinition="char(3) comment '国家代码 ISO标准'")
+	@Column(length=3)
 	private String nationalityId;
 
-	@Column(columnDefinition="char(2) comment '国家2位英文代码' ")
+	/**
+	 * 国家2位英文代码
+	 */
+	@Column(length=2)
 	private String nationality_2code;
 
-	@Column(columnDefinition="char(3) comment '国家3位英文代码' ")
+	/**
+	 * '国家3位英文代码
+	 */
+	@Column(length=3)
 	private String nationality_3code;
 
 
-	@Column(columnDefinition="varchar(128) comment 'ISO代码' ")
+	/**
+	 * ISO代码
+	 */
+	@Column(length = 128)
 	private String iso_code;
 
-	@Column(columnDefinition="varchar(256) comment '英文名称' ")
+	/**
+	 * 英文名称
+	 */
+	@Column
 	private String name_en;
 
-	@Column(columnDefinition="varchar(256) comment '中文名称' ")
+	/**
+	 * 中文名称
+	 */
+	@Column
 	private String name_cn;
 
 	@OneToMany(fetch=FetchType.LAZY)

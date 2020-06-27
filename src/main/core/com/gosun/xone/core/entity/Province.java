@@ -25,17 +25,29 @@ import lombok.Data;
 @Table(name="RegionProvince")
 public class Province{
 
+	/**
+	 * 省份编码
+	 */
 	@Id
-	@Column(columnDefinition="char(6) comment'省份编码'  ")
+	@Column(length = 6)
 	private String provinceCode;
 
-	@Column(columnDefinition="varchar(64) comment'省份名称'  ")
+	/**
+	 * 省份名称
+	 */
+	@Column(length = 64)
 	private String provinceName;
 
-	@Column(columnDefinition="varchar(64) comment'省份简称'  ")
+	/**
+	 * 省份简称
+	 */
+	@Column(length = 32)
 	private String shortName;
 
-	@Column(columnDefinition="varchar(32) comment'省份拼音码'  ")
+	/**
+	 * 省份拼音码
+	 */
+	@Column(length = 32)
 	private String chineseCode;
 
 	@ManyToOne(fetch=FetchType.LAZY)

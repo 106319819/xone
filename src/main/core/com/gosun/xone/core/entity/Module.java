@@ -2,6 +2,7 @@ package com.gosun.xone.core.entity;
 
 
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -36,8 +36,9 @@ public class Module extends BaseEntity{
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+//	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long moduleId;
 	
 	//名称

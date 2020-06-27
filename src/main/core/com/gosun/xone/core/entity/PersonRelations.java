@@ -11,7 +11,6 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -43,21 +42,27 @@ public class PersonRelations extends BaseEntity {
 	 * 组织人员id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+//	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long relationsId;
 
 	/**
 	 * 在编状态
 	 * 0不在编 1在编 2移除本组织
 	 */
-	@Column(nullable=false , columnDefinition="int(2) comment '在编状态 0不在编 1在编 2移除本组织'")
+	@Column(nullable=false, length = 2)
 	private Integer active;
-	
-	@Column(columnDefinition="bigint comment '人员id，引用person表主键'")
+	/**
+	 * 人员id，引用person表主键
+	 */
+	@Column
 	private Long personId;
 	
-	@Column(columnDefinition="bigint comment '组织id，引用organization表主键'")
+	/**
+	 * 组织id，引用organization表主键
+	 */
+	@Column
 	private Long organizationId;
 	
 	

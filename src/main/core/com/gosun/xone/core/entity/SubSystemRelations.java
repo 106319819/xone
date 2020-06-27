@@ -11,7 +11,6 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -37,21 +36,27 @@ import lombok.EqualsAndHashCode;
 public class SubSystemRelations extends BaseEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+//	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long relationsId;
 
 	/**
 	 * 启用状态
 	 * 0不启用 1启用 
 	 */
-	@Column(nullable=false , columnDefinition="int(2) comment '状态 0不启用 1启用 '")
+	@Column(nullable=false ,length = 2)
 	private Integer active;
-	
-	@Column(columnDefinition="bigint")
+	/**
+	 * 子系统id
+	 */
+	@Column
 	private Long subSystemId;
 	
-	@Column(columnDefinition="bigint comment '组织id，引用organization表主键'")
+	/**
+	 * 组织id，引用organization表主键
+	 */
+	@Column
 	private Long organizationId;
 	
 	

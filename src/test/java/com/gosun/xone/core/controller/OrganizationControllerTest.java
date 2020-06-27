@@ -1,6 +1,6 @@
 package com.gosun.xone.core.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class OrganizationControllerTest extends SpringBootBaseTest
 			organization.setComment("comment");
 			ObjectMapper mapper = new ObjectMapper();
 			String str = mapper.writeValueAsString(organization);
-			MockHttpServletRequestBuilder mhr = MockMvcRequestBuilders.post("/organization/create");
+			MockHttpServletRequestBuilder mhr = MockMvcRequestBuilders.post("/admin/organization/create");
 			mhr.accept(MediaType.APPLICATION_JSON_UTF8);
 			mhr.contentType(MediaType.APPLICATION_JSON_UTF8);
 			mhr.header(HttpHeaders.AUTHORIZATION,"authorization");
@@ -72,7 +72,7 @@ public class OrganizationControllerTest extends SpringBootBaseTest
 			ObjectMapper mapper = new ObjectMapper();
 			String str = mapper.writeValueAsString(pageable);
 			str = "{\"page\":1,\"size\":10,\"sort\":[{\"property\":\"sortNo\",\"direction\":\"ASC\"},{\"property\":\"organizationId\",\"direction\":\"ASC\"}]}";
-			MockHttpServletRequestBuilder mhr = MockMvcRequestBuilders.get("/organization/find-all");
+			MockHttpServletRequestBuilder mhr = MockMvcRequestBuilders.get("/admin/organization/find-all");
 			mhr.accept(MediaType.APPLICATION_JSON_UTF8);
 			mhr.contentType(MediaType.APPLICATION_JSON_UTF8);
 			mhr.header(HttpHeaders.AUTHORIZATION,"authorization");
@@ -95,7 +95,7 @@ public class OrganizationControllerTest extends SpringBootBaseTest
 	{
 		try{
 
-			MockHttpServletRequestBuilder mhr = MockMvcRequestBuilders.get("/organization/find-by-parent/0");
+			MockHttpServletRequestBuilder mhr = MockMvcRequestBuilders.get("/admin/organization/find-by-parent/0");
 			mhr.accept(MediaType.APPLICATION_JSON_UTF8);
 			mhr.contentType(MediaType.APPLICATION_JSON_UTF8);
 			mhr.header(HttpHeaders.AUTHORIZATION,"authorization");

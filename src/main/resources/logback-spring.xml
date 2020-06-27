@@ -223,5 +223,14 @@
             <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
-
+	<!-- 开发环境时使用的日志配置 -->
+    <springProfile name="postgresql">
+        <root level="INFO">
+            <!--<appender-ref ref="FILEERROR"/>-->
+            <!--<appender-ref ref="FILEWARN"/>-->
+            <!--<appender-ref ref="FILEINFO"/>-->
+            <!--<appender-ref ref="DBAPPENDER"/>-->
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
 </configuration>

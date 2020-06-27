@@ -18,7 +18,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -41,8 +40,9 @@ import lombok.EqualsAndHashCode;
 public class Person extends BaseEntity{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+//	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long personId;
 
 
@@ -103,14 +103,20 @@ public class Person extends BaseEntity{
 	/**
 	 *行政区划代码
 	 */
-	@Column(columnDefinition="varchar(64) comment '行政区划代码'  ")
+	@Column(length=64)
 	private String countyCode;
 
-	@Column(length=64,columnDefinition="varchar(64) comment '手机号'  ")
+	/**
+	 * 手机号
+	 */
+	@Column(length=64)
 	private String mobile;
 
 
-	@Column(length=256,columnDefinition="varchar(256) comment '邮箱'  ")
+	/**
+	 * 邮箱
+	 */
+	@Column(length=256)
 	private String email;
 
 	

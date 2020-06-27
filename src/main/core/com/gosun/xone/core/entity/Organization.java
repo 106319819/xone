@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -39,32 +38,56 @@ public class Organization extends BaseEntity{
 	 * 组织id
 	 */
 	@Id
-	//@GeneratedValue(strategy= GenerationType.AUTO)
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+//	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long organizationId;
 
-	@Column(nullable=false,length=256,columnDefinition="varchar(256) comment '组织中文名称' ")
+	/**
+	 * 组织中文名称
+	 */
+	@Column(nullable=false,length=256)
 	private String organizationName;
 
-	@Column(unique=true,length=256,columnDefinition="varchar(256) comment '组织编码64位长度 可以自定义默认为organizationId' ")
+	/**
+	 * 组织编码64位长度 可以自定义默认为organizationId
+	 */
+	@Column(unique=true,length=256)
 	private String organizationCode;
 
-	@Column(length=256,columnDefinition="varchar(256) comment '组织英文名称，默认与中文名称一致' ")
+	/**
+	 * 组织英文名称，默认与中文名称一致
+	 */
+	@Column(length=256)
 	private String organizationNameEn;
 
-	@Column(nullable=false,columnDefinition="int(4) comment '组织层级，从0开始，由系统维护' ")
+	/**
+	 * 组织层级，从0开始，由系统维护
+	 */
+	@Column(nullable=false,length = 4)
 	private Integer level = 0;
 
-	@Column(nullable=false,columnDefinition="int comment '排序索引，默认设置为organizationId' ")
+	/**
+	 * 排序索引，默认设置为organizationId
+	 */
+	@Column(nullable=false)
 	private Long sortNo = 0L;
 	
-	@Column(columnDefinition="bigint comment '上级组织的organizationId' ")
+	/**
+	 * 上级组织的organizationId
+	 */
+	@Column
 	private Long parentId;
 
-	@Column(nullable=false,columnDefinition="int(2) comment '状态 0 正常 1禁用 2删除 ' ")
+	/**
+	 * 状态 0 正常 1禁用 2删除
+	 */
+	@Column(nullable=false,length = 2)
 	private Integer state=0;
-	@Column(nullable=false,columnDefinition="char(1) comment '是否叶子节点 1是 0否' ")
+	/**
+	 * 是否叶子节点 1是 0否
+	 */
+	@Column(nullable=false,length = 1)
 	private String isLeaf="1";
 
 

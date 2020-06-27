@@ -9,13 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -32,8 +29,9 @@ import lombok.EqualsAndHashCode;
 public class SystemLog extends BaseEntity
 {
 	  	@Id
-		@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-		@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	  	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//		@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+//		@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 		private Long systemLogId;		
 		@Column
 		private String accountCode;		

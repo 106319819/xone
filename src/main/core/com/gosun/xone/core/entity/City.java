@@ -21,14 +21,23 @@ import lombok.Data;
 @Table(name="RegionCity")
 public class City {
 
+	/**
+	 * 城市编码
+	 */
 	@Id
-	@Column(columnDefinition="char(6) comment '城市编码' ")
+	@Column(length=6)
 	private String cityCode;
 
-	@Column(columnDefinition="varchar(64) comment '城市名称' ")
+	/**
+	 * 城市名称
+	 */
+	@Column(length=64)
 	private String cityName;
 
-	@Column(columnDefinition="varchar(32) comment'拼音码'  ")
+	/**
+	 * 拼音码
+	 */
+	@Column(length=32)
 	private String chineseCode;
 
 	@ManyToOne(fetch=FetchType.LAZY)

@@ -22,15 +22,19 @@ import lombok.Data;
 @EntityListeners(AuditingEntityListener.class)
 public abstract  class BaseEntity {
 
+	/**
+	 * 创建时间
+	 */
 	@CreatedDate
-	@Column(columnDefinition="datetime comment '创建时间' ")
 	private Date createTime;
 
 	@LastModifiedDate
 	private Date updateTime;
 
-
-	@Column(length=256,columnDefinition="varchar(256) comment '备注' ")
+	/**
+	 * 备注
+	 */
+	@Column(length=256)
 	private String comment;
 
 	

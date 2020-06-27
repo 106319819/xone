@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
@@ -32,17 +30,25 @@ public class SubSystem extends BaseEntity{
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+//	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long subSystemId;
-	
-	@Column(nullable=false,length=64, columnDefinition="varchar(64) comment '子系统编码'")
+	/**
+	 * 子系统编码
+	 */
+	@Column(nullable=false,length=64)
 	private String code;
-	
-	@Column(nullable=false,length=256, columnDefinition="varchar(64) comment '名称'")
+	/**
+	 * 名称
+	 */
+	@Column(nullable=false,length=256)
 	private String name;
 	
-	@Column(nullable=false,columnDefinition="int(2) comment '状态 0未激活 1激活 2禁用 3删除'")
+	/**
+	 * 状态 0未激活 1激活 2禁用 3删除
+	 */
+	@Column(nullable=false,length = 2)
 	private Integer status = 0;
 
 	//

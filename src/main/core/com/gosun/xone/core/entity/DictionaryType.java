@@ -11,7 +11,6 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -36,8 +35,9 @@ public class DictionaryType extends BaseEntity{
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
-	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "xoneIdentityGenerator") 
+//	@GenericGenerator(name = "xoneIdentityGenerator", strategy = "com.gosun.xone.core.utils.XoneIdentityGenerator")
 	private Long typeId;
 	
 	@Column(nullable=false)
@@ -46,7 +46,10 @@ public class DictionaryType extends BaseEntity{
 	@Column(nullable=false)
 	private String typeName;
 
-	@Column(nullable=false,columnDefinition="int(2) comment '账号状态 0未激活 1激活 2禁用 3删除'")
+	/**
+	 * 账号状态 0未激活 1激活 2禁用 3删除
+	 */
+	@Column(nullable=false,length=2)
 	private Integer status = 1;
 
 
